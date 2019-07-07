@@ -261,7 +261,7 @@ User Story Points	4
 
 ID	EP6
 Role	Client
-Detail	As a client, I want to establish the core foundation for my level, so my player can move within the boundaries
+Detail	As a client, I want to the player to not be able to level the frame of the level, so my player ca onlyn move within the boundaries of the level
 
 
 ID	US 6.1 
@@ -275,10 +275,9 @@ Acceptance Criteria
 Priority	2
 User Story Points	3
 
-
-ID	US 6.2
-Title	Keyboard Input
-Description	As the client, I only want the player to move when the level is in progress, so the player can control my character in the level
+ID  EP6.2
+Role    Client
+Detail  As a client, I want the player to only be mobile during the game, so the player cannot leave the level
 Acceptance Criteria 
 ●	If the boolean of the game level mentions that the game is still in progress, then the player can still provide keyboard inputs which will determine which action the player will take
 ●	If the boolean state is set that the level is completed, the keyboard inputs stop registering and the proceeds to the next level or the game program ends
