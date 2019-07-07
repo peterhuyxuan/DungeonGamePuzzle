@@ -68,7 +68,8 @@ User Story Points	2
 ID	US 2.3
 Title	Key item
 Description	As a player, I want to be able to pick up keys that can be used to open their corresponding door, so that I can move to different rooms in the dungeon. 
-Acceptance Criteria	●	The player should pick up the key when the player moves over the key
+Acceptance Criteria	
+●	The player should pick up the key when the player moves over the key
 ●	A player can only carry one key at a time
 ●	A key is used to open one corresponding door
 ●	When the key is used to open the door the key disappears from the player’s inventory
