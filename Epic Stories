@@ -144,7 +144,8 @@ User Story Points	4
 ID	US 3.2
 Title	Destroy enemies goal
 Description	As a player, I want there to be a goal type where I must destroy all the enemies, as it provides more challenges to the game
-Acceptance Criteria	●	Enemies must exist on the level
+Acceptance Criteria	
+●	Enemies must exist on the level
 ●	There must be items the player can use to destroy all the enemies
 ●	The player cannot exit until all the enemies are destroyed
 Priority	1
@@ -211,7 +212,8 @@ User Story Points	3
 ID	US 4.3
 Title	Breadth or Depth first tracking
 Description	As the enemy, I would like to track the player using a depth first or breadth first search, so I can follow the player more effectively
-Acceptance Criteria	●	If an enemy is present on a level they will track the player and their movements
+Acceptance Criteria	
+●	If an enemy is present on a level they will track the player and their movements
 ●	Will be using either the breadth first search or depth first search algorithm to move the enemy towards the player with each turn
 ●	The enemy will take into account features on the map that it cannot move around (e.g. boulders and walls), moving around these features
 Priority	3
@@ -270,16 +272,14 @@ Acceptance Criteria
 ●	If player reaches bottom y-axis then y-position value of player can’t decrease any further
 ●	If player reaches left x-axis then x-position value of player can’t decrease any further
 ●	If player reaches right x-axis then x-position value of player can’t increase any further
-●	Upon explosion any boulders or enemies in the squares immediately to the left, right, above or below are destroyed
-●	If a player is on one of the tiles of the bombs blast they die
 Priority	2
 User Story Points	3
 
 
 ID	US 6.2
 Title	Keyboard Input
-Description	As the client, I would like to input some keyboard commands, so the player can control my character in the level
-Acceptance Criteria	
+Description	As the client, I only want the player to move when the level is in progress, so the player can control my character in the level
+Acceptance Criteria 
 ●	If the boolean of the game level mentions that the game is still in progress, then the player can still provide keyboard inputs which will determine which action the player will take
 ●	If the boolean state is set that the level is completed, the keyboard inputs stop registering and the proceeds to the next level or the game program ends
 Priority	1
