@@ -1,0 +1,290 @@
+Doobies Milestone 1 
+
+Key:
+-	User Story Points: 1.5 hour per point
+-	Priority: Priority assigned in ascending number order (i.e. 1 denotes the highest priority of the epic)
+
+
+------------------------------------ EP1  -----------------------------------
+
+
+ID	EP1
+Role	Player
+Detail	As a player, I want level to be able to move around the dungeon so I can reach the exit
+
+ID	US 1.1 
+Title	Movement
+Description	As a player, I want to be able to move, so I can move around dungeon.
+Acceptance Criteria	
+●	When the “w” key is pressed the player moves up the dungeon if not impeded 
+●	When the “d” key is pressed the player moves to the right if not impeded 
+●	When the “s” key is pressed the player moves down the dungeon if not impeded 
+●	When the “a” key is pressed the player moves left if not impeded 
+Priority	1
+User Story Points	3
+
+ID	US 1.2
+Title	Exiting the level
+Description	As a player, once I complete all the tasks of a given dungeon I would like to get out of the level, so I can proceed with the next level
+Acceptance Criteria	
+●	I must be able to move towards the exit
+●	If the Boolean variable of the level requirement is completed, then when the player reaches the coordinates of the front of the door, the player can exit the level, if not then the player won’t be able to exit the level
+●	When I reach the exit, I should be taken to the next level
+Priority	2
+User Story Points	2
+
+
+
+----------------------------------- EP2  -----------------------------------
+
+
+ID	EP2
+Role	Player
+Detail	As a player, I want to pick up different items so I can deal with obstacles in the level
+
+ID	US 2.1
+Title	Picking up object
+Description	As a player, I would like to pick up items, so I gain that inside my inventory to help complete the level
+Acceptance Criteria	
+●	When the player reaches the same x and y coordinate as the item, the item will be added to the list of items in the inventory that will belong to the player class
+●	When an item is picked up it will disappear from the floor
+Priority	1
+User Story Points	2
+
+
+ID	US 2.2
+Title	Sword item
+Description	As a player, I want to be able to pick up swords so that I can destroy the enemies on a level
+Acceptance Criteria
+●	The player should pick up the sword when the player moves over the sword
+●	When the player has the sword equip, they should be able to kill enemies
+●	The sword will destroy enemies in one hit
+●	The sword will degrade after it is used 5 times
+
+Priority	2
+User Story Points	2
+
+
+ID	US 2.3
+Title	Key item
+Description	As a player, I want to be able to pick up keys that can be used to open their corresponding door, so that I can move to different rooms in the dungeon. 
+Acceptance Criteria	●	The player should pick up the key when the player moves over the key
+●	A player can only carry one key at a time
+●	A key is used to open one corresponding door
+●	When the key is used to open the door the key disappears from the player’s inventory
+
+Priority	6
+User Story Points	4
+
+
+ID	US 2.4 
+Title	Boulder
+Description	As a level designer, I would like there to be a boulder item, so that I can create more challenges for a player in a level
+Acceptance Criteria	
+●	The boulder can be pushed by the player if they move in the direction of a boulder when they are adjacent to it
+●	The boulder cannot be pushed if there is a wall or another boulder in the way the player is pushing
+●	If a boulder is on a tile that is in the radius of a bomb blast, the boulder is destroyed
+Priority	3
+User Story Points	3
+
+
+ID	US 2.5
+Title	Potion item
+Description	As a player, I want to be able to pick up potions so that I can deter and destroy the enemies on a level
+Acceptance Criteria	
+●	The player should pick up a potion when the player moves over the potion
+●	When the player they immediately are granted the benefits of the potion
+●	The effects of the potion only last a limited time
+●	The potion should make the player destroy enemies when the player comes into contact with enemies
+●	When a player has the effects of the potion, enemies should run away from the player
+Priority	5
+User Story Points	3
+
+
+
+
+ID	US 2.6 
+Title	Bomb item 
+Description	As a player, I want to be able to pick up bombs so that I can use them to destroy boulders and enemies within its blast radius
+Acceptance Criteria	
+●	The player should pick up a bomb when the player moves over the bomb
+●	The player should be able to collect the multiple bombs
+●	When the player presses “b” they drop a bomb from their inventory
+●	When a bomb is dropped, its fuse begins to burn, and after a short period it explodes
+●	When a bomb fuse is burning, different sprites are used to communicate how much of the fuse has burnt
+●	Upon explosion any boulders or enemies in the squares immediately to the left, right, above or below are destroyed
+●	If a player is on one of the tiles of the bombs blast, they die
+Priority	4
+User Story Points	4
+
+
+----------------------------------- EP3  -----------------------------------
+ 
+
+ID	EP3
+Role	Player
+Detail	As a player, I want level to have different goals for levels, so that each level is unique and engaging.
+
+
+ID	US 3.1
+Title	Boulder and switches goal
+Description	As a player, I want there to be a goal type where I must move boulders onto floor switches, as it provides interesting puzzle complexities to levels
+Acceptance Criteria	
+●	There must be a possible solution to the problem 
+●	There must be boulders on the level
+●	Switches should exist in the dungeon, which act as empty squares, however with the property that when a boulder is on them, they are triggered
+●	Switches should deactivate when boulders are pushed off the switch.
+●	When all the boulders are on the switches the player can exit the dungeon
+●	The player cannot exit until the boulder puzzle is completed
+Priority	3
+User Story Points	4
+
+
+ID	US 3.2
+Title	Destroy enemies goal
+Description	As a player, I want there to be a goal type where I must destroy all the enemies, as it provides more challenges to the game
+Acceptance Criteria	●	Enemies must exist on the level
+●	There must be items the player can use to destroy all the enemies
+●	The player cannot exit until all the enemies are destroyed
+Priority	1
+User Story Points	2
+
+
+ID	US 3.3
+Title	Collect treasure goal
+Description	As a player, I want there to be a goal type where I must collect all the treason on a level, as it provides another challenge to the game
+Acceptance Criteria	
+●	There must be at least one or more treasure items on the map
+●	The treasure needs to be collectable by the player
+●	The player cannot exit until all the treasure has been collected
+Priority	2
+User Story Points	3
+
+
+
+ID	US 3.4
+Title	Complex goals
+Description	As a player, I want the game to have goals that consist of multiple simple goals, so that it does not become repetitive, boring and easy
+Acceptance Criteria	
+●	Complex goals need to be an aggregation of simple goals
+●	If an exit goal is a requirement to the complex goal, the exit must be the last goal completed
+●	Complex goals can have a “and” relationship i.e. both goals need to be completed to complete the level
+●	Complex goal can have a “or” relationship i.e. either one of the goals can be completed before advancing 
+Priority	4
+User Story Points	3
+
+
+
+----------------------------------- EP4  -----------------------------------
+
+
+ID	EP4
+Role	Enemy
+Detail	As an enemy, I want to be able to kill players, so that they have to run away while they complete the level
+
+
+ID	US 4.1
+Title	Enemy and player collision
+Description	As the player and enemy, if they encounter each then they will attack other, so either one of them will die
+Acceptance Criteria	
+●	If the enemy and player are located on the same coordinate, they will collide and either of them will die
+●	If the player is equipped with the sword then the enemy will die
+●	If the player is under the effect of the potion the enemy will die
+●	If a player is carrying any item that can destroy the enemy on collision (a sword or a potion) the enemy runs away from the player
+●	Else if the player has no sword or potion with them they will die from the enemy
+Priority	2
+User Story Points	3
+
+
+ID	US 4.2
+Title	Enemy tracking the player
+Description	As the enemy, I would like to trail the player, so I can kill him 
+Acceptance Criteria	
+●	If an enemy is present on a level, they will track the player and their movements
+●	The enemy will track the player using a basic algorithm that moves the enemy closer to the player
+●	The enemy will not take into account the presence of objects that block its path, such as walls
+Priority	1
+User Story Points	3
+
+
+ID	US 4.3
+Title	Breadth or Depth first tracking
+Description	As the enemy, I would like to track the player using a depth first or breadth first search, so I can follow the player more effectively
+Acceptance Criteria	●	If an enemy is present on a level they will track the player and their movements
+●	Will be using either the breadth first search or depth first search algorithm to move the enemy towards the player with each turn
+●	The enemy will take into account features on the map that it cannot move around (e.g. boulders and walls), moving around these features
+Priority	3
+User Story Points	4
+
+
+----------------------------------- EP5  -----------------------------------
+
+
+ID	EP5
+Role	Player
+Detail	As a player, I want the user interface to be contextual to the gameplay, so the experience is more immersive
+
+
+ID	US 5.1
+Title	Objects have their correct sprites
+Description	As a player, I want the different objects and entities in the game to have the correct sprites, so that I can easily differentiate each object and the gameplay is more immersive
+Acceptance Criteria	
+●	Each item and enemy have a different sprite
+●	A JSON file will be used to position the sprite in the right location for the object or entity
+●	A sword looks like a sword
+●	A potion looks like a potion
+●	An enemy looks like an enemy
+●	A door looks like a door
+●	A boulder looks like a boulder
+●	Objects and entities appear above ground (or empty) tiles
+Priority	2
+User Story Points	4
+
+ID	US 5.2
+Title	The level design
+Description	As a player, I want the levels to look dungeons, so the gameplay is more immersive
+Acceptance Criteria	
+●	A JSON file will be used to map the layout of the dungeon
+●	A wall surrounds the frame of the level
+●	A wall looks like a wall
+●	Empty tile spaces are a different shade to walls
+●	Empty tile spaces look like dirt or earth
+Priority	1
+User Story Points	4
+
+
+----------------------------------- EP6  -----------------------------------
+
+
+ID	EP6
+Role	Client
+Detail	As a client, I want to establish the core foundation for my level, so my player can move within the boundaries
+
+
+ID	US 6.1 
+Title	Wall Boundaries
+Description	As the client, I would like to establish a wall around the map, so the player will not venture off out of the game frame
+Acceptance Criteria	
+●	If player reaches top y-axis then y-position value of player can’t increase any further
+●	If player reaches bottom y-axis then y-position value of player can’t decrease any further
+●	If player reaches left x-axis then x-position value of player can’t decrease any further
+●	If player reaches right x-axis then x-position value of player can’t increase any further
+●	Upon explosion any boulders or enemies in the squares immediately to the left, right, above or below are destroyed
+●	If a player is on one of the tiles of the bombs blast they die
+Priority	2
+User Story Points	3
+
+
+ID	US 6.2
+Title	Keyboard Input
+Description	As the client, I would like to input some keyboard commands, so the player can control my character in the level
+Acceptance Criteria	
+●	If the boolean of the game level mentions that the game is still in progress, then the player can still provide keyboard inputs which will determine which action the player will take
+●	If the boolean state is set that the level is completed, the keyboard inputs stop registering and the proceeds to the next level or the game program ends
+Priority	1
+User Story Points	2
+
+
+
+
+
