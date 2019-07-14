@@ -23,6 +23,7 @@ public class Dungeon {
     private List<Entity> entities;
     private Entity[][] entity2DArray;
     private Player player;
+    private GoalComponentsComplete goal;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -56,4 +57,35 @@ public class Dungeon {
     public Entity getTile(int x, int y){
 		return entity2DArray[x][y];  	
     }
+    
+    public boolean checkGoal(){
+    	return this.goal.checkGoalComponent(this);
+    }
+    
+    public int getPlayerX(){
+    	return player.getX();
+    }
+    
+    public int getPlayerY(){
+    	return player.getY();
+    }
+    
+    public Entity getExit(){
+    	for (Entity entity : entities){
+    		if (entity instanceof Exit){
+    			return entity;
+    		}
+    	}
+    	return null;
+    }
+
+	public GoalComponentsComplete getGoal() {
+		return goal;
+	}
+
+	public void setGoal(GoalComponentsComplete goal) {
+		this.goal = goal;
+	}
+    
+    
 }

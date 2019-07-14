@@ -17,7 +17,9 @@ import org.json.JSONTokener;
  *
  */
 public abstract class DungeonLoader {
-
+	public static final int AND = 0;
+	public static final int OR = 1;
+	
     private JSONObject json;
 
     public DungeonLoader(String filename) throws FileNotFoundException {
@@ -39,9 +41,61 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        
+        JSONObject goalJSON = json.getJSONObject("goal-condition");
+        dungeon.setGoal(loadGoal(goalJSON));
+        
         return dungeon;
     }
-
+    
+    private GoalComponentsComplete loadGoal(JSONObject json){
+    	String goalName = json.getString("goal");
+    	GoalComponentsComplete goalObj;
+    	
+    	if (!goalName.contentEquals("AND") && !goalName.contentEquals("OR")){
+    		goalObj = loadSimple(goalName);
+    	} else {
+    		JSONArray subGoals = json.getJSONArray("subgoals");
+    		goalObj = loadComplex(goalName, subGoals);
+    	}
+    	
+    	return goalObj;
+    }
+    
+    private Goal loadSimple(String goal){
+    	Goal simpleGoal = null;
+    	
+    	switch (goal) {
+    	case "exit":
+    		simpleGoal = new Goal(new ExitGoal()); 
+    		break;
+    	}
+    	return simpleGoal;
+    }
+    
+    private ComplexGoal loadComplex(String goal, JSONArray subGoals){
+    	GoalComponentsComplete goal1 = null;
+		GoalComponentsComplete goal2 = null;
+		ComplexGoal complexGoal = null;
+		
+		switch (goal) {
+    	
+    	case "AND":
+    		goal1 = loadGoal(subGoals.getJSONObject(0));
+    		goal2 = loadGoal(subGoals.getJSONObject(1));
+    		complexGoal = new ComplexGoal(goal1, goal2, AND);
+    		break;
+    		
+    	case "OR":
+    		goal1 = loadGoal(subGoals.getJSONObject(0));
+    		goal2 = loadGoal(subGoals.getJSONObject(1));
+    		complexGoal = new ComplexGoal(goal1, goal2, OR);
+    		break;
+		}	
+		
+		return complexGoal;
+    }
+    
     private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");
@@ -60,6 +114,11 @@ public abstract class DungeonLoader {
             onLoad(wall);
             entity = wall;
             break;
+       case "exit":
+    	    Exit exit = new Exit(x, y);
+    	    onLoad(exit);
+            entity = exit;
+            break;
         // TODO Handle other possible entities
         }
         // NOTE CHANGE addEntity parameters from addEntity(entity); too...
@@ -69,6 +128,8 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Entity player);
 
     public abstract void onLoad(Wall wall);
+    
+    public abstract void onLoad(Exit exit);
 
     // TODO Create additional abstract methods for the other entities
 
