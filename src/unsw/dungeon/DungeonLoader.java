@@ -62,7 +62,8 @@ public abstract class DungeonLoader {
             break;
         // TODO Handle other possible entities
         }
-        dungeon.addEntity(entity);
+        // NOTE CHANGE addEntity parameters from addEntity(entity); too...
+        dungeon.addEntity(entity, x , y);
     }
 
     public abstract void onLoad(Entity player);
