@@ -86,9 +86,36 @@ public class Dungeon {
     	player.moveRight();
     }
     
-    public Entity getExit(){
+    public Entity getExit() {
     	for (Entity entity : entities){
     		if (entity instanceof Exit){
+    			return entity;
+    		}
+    	}
+    	return null;
+    }
+    
+    public Entity getTreasure() {
+    	for (Entity entity : entities){
+    		if (entity instanceof Treasure){
+    			return entity;
+    		}
+    	}
+    	return null;
+    }
+    
+    public Entity getBoulder() {
+    	for (Entity entity : entities){
+    		if (entity instanceof Boulder){
+    			return entity;
+    		}
+    	}
+    	return null;
+    }
+    
+    public Entity getFloorSwitch() {
+    	for (Entity entity : entities){
+    		if (entity instanceof FloorSwitch){
     			return entity;
     		}
     	}
