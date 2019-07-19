@@ -15,7 +15,4 @@ public class Goal implements GoalComponentsComplete{
 	public boolean checkGoalComponent(Dungeon D) {
 		return checkGoalCondition(D);
 	}
-
-	
-	
 }
