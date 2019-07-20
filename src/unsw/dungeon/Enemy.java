@@ -22,11 +22,11 @@ public class Enemy extends Entity implements Observer {
 				return;
 			}
 		}
-		if (yDiff < 0 && this.canMoveDown()){
-			 y().set(getY() + 1);
-			return;
-		} else if (yDiff > 0 && this.canMoveUp()) {
+		if (yDiff < 0 && this.canMoveUp()){
 			 y().set(getY() - 1);
+			return;
+		} else if (yDiff > 0 && this.canMoveDown()) {
+			 y().set(getY() + 1);
 			return;
 		}
 	}

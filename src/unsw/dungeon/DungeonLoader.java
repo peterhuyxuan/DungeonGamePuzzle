@@ -140,6 +140,7 @@ public abstract class DungeonLoader {
 	        entity = door;
 	        break;
        case "enemy":
+    	   System.out.println("Loading enemy");
   	    	Enemy enemy = new Enemy(dungeon, x, y);
 	   	    onLoad(enemy);
 	        entity = enemy;

@@ -26,8 +26,9 @@ public class Player extends Entity implements Moveable, Observable {
 
     @Override
     public void moveUp() {
-    	
+    	updateEnemyList();
     	Entity aboveEntity = getAboveTile();
+    	
     	if (!enemies.isEmpty()){
     		notifyObservers();
     	}
@@ -52,7 +53,7 @@ public class Player extends Entity implements Moveable, Observable {
 
     @Override
     public void moveDown() {
-    	
+    	updateEnemyList();
     	Entity belowEntity = getBelowTile();
     	if (!enemies.isEmpty()){
     		notifyObservers();
@@ -76,7 +77,7 @@ public class Player extends Entity implements Moveable, Observable {
 
     @Override
     public void moveLeft() {
-    	
+    	updateEnemyList();
     	Entity leftEntity = getLeftTile();
     	if (!enemies.isEmpty()){
     		notifyObservers();
@@ -100,7 +101,7 @@ public class Player extends Entity implements Moveable, Observable {
 
     @Override
     public void moveRight() {
-    	
+    	updateEnemyList();
     	Entity rightEntity = getRightTile();
     	if (!enemies.isEmpty()){
     		notifyObservers();
@@ -156,7 +157,20 @@ public class Player extends Entity implements Moveable, Observable {
 			enemy.update();
 		}
 	}
+	
+	public void updateEnemyList(){
+		this.enemies = dungeon.enemyList();		
+	}
+
+	public ArrayList<Enemy> getEnemies() {
+		return enemies;
+	}
+
+	public void setEnemies(ArrayList<Enemy> enemies) {
+		this.enemies = enemies;
+	}
     
+	
     /*	BUGGED
     public void movePositionUp(){
     	 y().set(getY() + 1);

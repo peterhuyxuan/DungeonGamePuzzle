@@ -56,9 +56,12 @@ public class Dungeon {
     }
     
     public ArrayList<Enemy> enemyList(){
+    	//System.out.println("Making enemy list");
     	ArrayList<Enemy> enemies = new ArrayList<>();
     	for (Entity e : this.entities){
+    		//System.out.println("Checking entity");
     		if (e instanceof Enemy){
+    			//System.out.println("Entity is enemy");
     			enemies.add((Enemy)e);
     		}
     	}
