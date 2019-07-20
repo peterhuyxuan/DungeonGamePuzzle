@@ -29,7 +29,7 @@ public class Player extends Entity implements Moveable, Observable {
     	
     	Entity aboveEntity = getAboveTile();
     	if (!enemies.isEmpty()){
-    		enemies.get(0).move();
+    		notifyObservers();
     	}
     	
     	if (aboveEntity instanceof Wall){
