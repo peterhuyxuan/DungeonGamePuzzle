@@ -25,6 +25,7 @@ public class Dungeon {
     private Entity[][] WallBoulder2DArray;
     private Player player;
     private GoalComponentsComplete goal;
+    private List<SwitchTrigger> switchTriggers;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -32,6 +33,8 @@ public class Dungeon {
         this.entities = new ArrayList<>();
         this.WallBoulder2DArray = new Entity[width][height];
         this.player = null;
+        this.goal = null;
+        this.switchTriggers = new ArrayList<>();
     }
 
     public int getWidth() {
@@ -168,7 +171,6 @@ public class Dungeon {
     	return null;
     }
 
-
 	public GoalComponentsComplete getGoal() {
 		return goal;
 	}
@@ -181,5 +183,11 @@ public class Dungeon {
 		return entities;
 	}
 	
-	
+	public void addSwitchTrigger(SwitchTrigger trigger) {
+	    switchTriggers.add(trigger);
+    }
+    
+    public List<SwitchTrigger> getSwitchTriggers() {
+		return switchTriggers;
+	}
 }
