@@ -22,7 +22,7 @@ public class Dungeon {
 
     private int width, height;
     private List<Entity> entities;
-    private Entity[][] entity2DArray;
+    private Entity[][] WallBoulder2DArray;
     private Player player;
     private GoalComponentsComplete goal;
 
@@ -30,7 +30,7 @@ public class Dungeon {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<>();
-        this.entity2DArray = new Entity[width][height];
+        this.WallBoulder2DArray = new Entity[width][height];
         this.player = null;
     }
 
@@ -52,11 +52,43 @@ public class Dungeon {
 
     public void addEntity(Entity entity, int x, int y) {
         entities.add(entity);
-        entity2DArray[x][y] = entity;
+        if (entity instanceof Wall || entity instanceof Boulder) setTile(entity, x, y);
     }
     
     public Entity getTile(int x, int y){
-		return entity2DArray[x][y];  	
+		return  WallBoulder2DArray[x][y];  	
+    }
+    
+    public void setTile(Entity e, int x, int y){
+    	WallBoulder2DArray[x][y] = e;
+    }
+    
+    public Entity[][] getWallBoulder2DArray() {
+		return WallBoulder2DArray;
+	}
+
+	public void setWallBoulder2DArray(Entity[][] wallBoulder2DArray) {
+		this.WallBoulder2DArray = wallBoulder2DArray;
+	}
+
+	/* NOT NEEDED
+	public void update2DArrayEntity(Entity entity, int newX, int newY){
+		 	for (int x = 0; x < getWidth(); x++){
+		 		for (int y = 0; y < getHeight(); y++){
+		 			if (getTile(x,y).equals(entity)){
+		 				setTile(null, x, y);
+		 				setTile(entity, newX, newY);
+		 			}
+		 		}
+		 	}
+    }*/
+    
+    public void update2DArray(){
+    	setWallBoulder2DArray(new Entity[width][height]);
+    	for (Entity entity : entities){
+    		 if (entity instanceof Wall || entity instanceof Boulder) setTile(entity, entity.getX(), entity.getY());
+        
+    	}
     }
     
     public boolean checkGoal(){
@@ -124,8 +156,6 @@ public class Dungeon {
     }
 
 
-
-
 	public GoalComponentsComplete getGoal() {
 		return goal;
 	}
@@ -133,4 +163,10 @@ public class Dungeon {
 	public void setGoal(GoalComponentsComplete goal) {
 		this.goal = goal;
 	}
+
+	public List<Entity> getEntities() {
+		return entities;
+	}
+	
+	
 }

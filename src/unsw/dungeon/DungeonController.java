@@ -52,15 +52,19 @@ public class DungeonController {
         switch (event.getCode()) {
         case UP:
             player.moveUp();
+            dungeon.update2DArray();
             break;
         case DOWN:
             player.moveDown();
+            dungeon.update2DArray();
             break;
         case LEFT:
             player.moveLeft();
+            dungeon.update2DArray();
             break;
         case RIGHT:
             player.moveRight();
+            dungeon.update2DArray();
             break;
         default:
             break;
