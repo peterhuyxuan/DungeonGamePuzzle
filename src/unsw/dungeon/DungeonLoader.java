@@ -133,6 +133,7 @@ public abstract class DungeonLoader {
   	    	Key key = new Key(x, y);
 	   	    onLoad(key);
 	        entity = key;
+	        dungeon.addItem(entity);
 	        break;
        case "door":
   	    	Door door = new Door(x, y);
@@ -149,21 +150,25 @@ public abstract class DungeonLoader {
   	    	Potion potion = new Potion(x, y);
 	   	    onLoad(potion);
 	        entity = potion;
+	        dungeon.addItem(entity);
 	        break;
        case "sword":
   	    	Sword sword = new Sword(x, y);
-	   	    onLoad(sword);
+	   	    onLoad(sword);	   	
 	        entity = sword;
+	   	    dungeon.addItem(entity);
 	        break;
        case "treasure":
   	    	Treasure treasure = new Treasure(x, y);
 	   	    onLoad(treasure);
 	        entity = treasure;
+	        dungeon.addItem(entity);
 	        break;
        case "bomb":
  	    	Bomb bomb = new Bomb(x, y);
 	   	    onLoad(bomb);
 	        entity = bomb;
+	        dungeon.addItem(entity);
 	        break;
         // TODO Handle other possible entities
         }

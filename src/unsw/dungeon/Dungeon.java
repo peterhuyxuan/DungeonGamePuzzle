@@ -22,6 +22,7 @@ public class Dungeon {
 
     private int width, height;
     private List<Entity> entities;
+    private ArrayList<Entity> items;
     private Entity[][] WallBoulder2DArray;
     private Player player;
     private GoalComponentsComplete goal;
@@ -32,6 +33,7 @@ public class Dungeon {
         this.entities = new ArrayList<>();
         this.WallBoulder2DArray = new Entity[width][height];
         this.player = null;
+        this.items = new ArrayList<>();
     }
 
     public int getWidth() {
@@ -66,6 +68,51 @@ public class Dungeon {
     		}
     	}
     	return enemies;
+    }
+    
+    public void checkPlayerEnemyCollision(){
+    	ArrayList<Enemy> enemies = this.enemyList();
+    	for (Enemy enemy : enemies){
+    		if (enemy.getX() == player.getX() && enemy.getY() == player.getY()){
+    			if (EnemyDies()){
+    				removeEntity((Entity)enemy);
+    			} else {
+    				// player dies
+    			}
+    		}
+    	}
+    }
+    
+    
+    public boolean EnemyDies() {
+    	if (player.hasSword()) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public Entity itemPickUp(){
+    	for (Entity item : items){
+    		if (player.getX() == item.getX() && player.getY() == item.getY()){
+    			player.pickUpItem(item);
+    			removeEntity(item);
+    			removeItem(item);
+    			return item;
+    		}
+    	}
+    	return null;
+    }
+    
+    public void removeEntity(Entity entity){
+    	entities.remove(entity);
+    }
+    
+    public void addItem(Entity item){
+    	items.add(item);
+    }
+    
+    public void removeItem(Entity item){
+    	items.remove(item);
     }
     
     public Entity getTile(int x, int y){
