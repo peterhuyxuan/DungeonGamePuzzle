@@ -75,7 +75,7 @@ public class Dungeon {
     	for (Enemy enemy : enemies){
     		if (enemy.getX() == player.getX() && enemy.getY() == player.getY()){
     			if (EnemyDies()){
-    				removeEntity((Entity)enemy);
+    				removeEntity(enemy);
     			} else {
     				// player dies
     			}
@@ -86,6 +86,7 @@ public class Dungeon {
     
     public boolean EnemyDies() {
     	if (player.hasSword()) {
+    		//player.s
     		return true;
     	}
     	return false;

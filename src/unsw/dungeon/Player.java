@@ -187,6 +187,17 @@ public class Player extends Entity implements Moveable, Observable {
 		return false;
 	}
 	
+	public void hitSword(){
+		//Entity sword = getSword();
+		//(Sword)sword
+	}
+	
+	public Entity getSword(){
+		for (Entity item : inventory){
+			if (item instanceof Sword) return item;
+		}
+		return null;
+	}
     /*	BUGGED
     public void movePositionUp(){
     	 y().set(getY() + 1);

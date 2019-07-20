@@ -77,6 +77,7 @@ public class DungeonController {
         	//squares.add(new ImageView(ground), item.getX(), item.getY());
         	//squares.getChildren().add(entity);
         }   
+        dungeon.checkPlayerEnemyCollision();
     }
     
     /*
