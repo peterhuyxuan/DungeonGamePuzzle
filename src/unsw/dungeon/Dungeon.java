@@ -86,7 +86,7 @@ public class Dungeon {
     
     public boolean EnemyDies() {
     	if (player.hasSword()) {
-    		//player.s
+    		player.hitSword();
     		return true;
     	}
     	return false;
@@ -95,7 +95,9 @@ public class Dungeon {
     public Entity itemPickUp(){
     	for (Entity item : items){
     		if (player.getX() == item.getX() && player.getY() == item.getY()){
-    			player.pickUpItem(item);
+    			if (item instanceof Sword) {
+    				player.pickUpSword();
+    			}
     			removeEntity(item);
     			removeItem(item);
     			return item;

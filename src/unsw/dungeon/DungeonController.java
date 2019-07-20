@@ -67,16 +67,19 @@ public class DungeonController {
             break;
         }
         dungeon.update2DArray();
+        
+        // Concurrency error if set to void???? 
         Entity item = dungeon.itemPickUp();
-        if (!(item == null)){
+        
+        //if (!(item == null)){
         	//System.out.println("Removing Item");
-        	initialEntities.remove(item);
+        	//initialEntities.remove(item);
         	//ImageView image = initialEntities.get(item.getX() * item.getY());
         	//squares.getChildren().remove(image);
         	//Image ground = new Image("/dirt_0_new.png");
         	//squares.add(new ImageView(ground), item.getX(), item.getY());
         	//squares.getChildren().add(entity);
-        }   
+        //}   
         dungeon.checkPlayerEnemyCollision();
     }
     

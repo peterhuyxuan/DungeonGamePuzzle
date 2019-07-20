@@ -13,6 +13,7 @@ public class Player extends Entity implements Moveable, Observable {
     private Dungeon dungeon;
     public ArrayList<Enemy> enemies;
     public ArrayList<Entity> inventory;
+    public ArrayList<Sword> swords;
 
     /**
      * Create a player positioned in square (x,y)
@@ -24,6 +25,7 @@ public class Player extends Entity implements Moveable, Observable {
         this.dungeon = dungeon;
         this.enemies = dungeon.enemyList();
         this.inventory = new ArrayList<>();
+        this.swords = new ArrayList<>();
     }
 
     @Override
@@ -180,23 +182,22 @@ public class Player extends Entity implements Moveable, Observable {
 		return inventory;
 	}
 	
+	public void pickUpSword(){
+		Sword sword = new Sword(0,0);
+		swords.add(sword);
+	}
+	
 	public boolean hasSword(){
-		for (Entity item : inventory){
-			if (item instanceof Sword) return true;
-		}
-		return false;
+		return !swords.isEmpty();
 	}
 	
 	public void hitSword(){
-		//Entity sword = getSword();
-		//(Sword)sword
+		Sword sword = getSword();
+		sword.strike();
 	}
 	
-	public Entity getSword(){
-		for (Entity item : inventory){
-			if (item instanceof Sword) return item;
-		}
-		return null;
+	public Sword getSword(){
+		return swords.get(0);
 	}
     /*	BUGGED
     public void movePositionUp(){
