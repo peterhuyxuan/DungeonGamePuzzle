@@ -172,7 +172,7 @@ public class Player extends Entity implements Moveable, Observable {
 	@Override
 	public void notifyObservers() {
 		for (Enemy enemy : enemies){
-			enemy.update();
+			enemy.update(this.hasPotion());
 		}
 	}
 	

@@ -3,10 +3,20 @@ package unsw.dungeon;
 public class Enemy extends Entity implements Observer {
 	
 	Dungeon dungeon;
+	EnemyMove moveState;
 	
     public Enemy(Dungeon dungeon, int x, int y) {
         super(x, y);   
         this.dungeon = dungeon;
+        this.moveState = new AttackMove();
+    }
+    
+    public void makeEvade(){
+    	moveState = moveState.makeEvade();
+    }
+    
+    public void makeAttack(){
+    	moveState = moveState.makeAttack();
     }
 
 	public void move() {
@@ -40,17 +50,6 @@ public class Enemy extends Entity implements Observer {
 		int playerY = dungeon.getPlayerY();
 		return playerY - this.getY();
 	}
-	
-	/*
-	public String findVerticalDirection(){
-		int yDirection = yDiff();
-		if (yDirection )
-	}
-	
-	public String findHorizontalDirection(){
-		
-	}*/
-
 	
     public Entity getAboveTile(){
 		return  this.dungeon.getTile(getX(), getY() - 1);  	
@@ -101,7 +100,15 @@ public class Enemy extends Entity implements Observer {
     }
 
 	@Override
-	public void update() {
+	public void update(boolean hasPotion) {
+
+		if (hasPotion){
+			//System.out.println("Making Evade");
+			this.makeEvade();
+		} else if (!hasPotion) {
+			//System.out.println("Making Attack");
+			this.makeAttack();
+		}
 		move();
 	}
 }
