@@ -1,7 +1,18 @@
 package unsw.dungeon;
 
 public class Treasure extends Entity {
-    public Treasure(int x, int y) {
-        super(x, y);   
+    private boolean pickedUp;
+	
+	public Treasure(int x, int y, boolean pickedUp) {
+		super(x, y);   
+		this.setPickedUp(false);
     }
+	
+	public boolean isPickedUp() {
+		return pickedUp;
+	}
+
+	public void setPickedUp(boolean pickedUp) {
+		this.pickedUp = pickedUp;
+	}
 }
