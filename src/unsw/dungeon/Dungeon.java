@@ -8,6 +8,7 @@ import java.util.List;
 //import javafx.beans.property.IntegerProperty;
 //import javafx.beans.property.SimpleIntegerProperty;
 
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -121,6 +122,9 @@ public class Dungeon {
     	}
     	return null;
     }
+
+
+
 
 	public GoalComponentsComplete getGoal() {
 		return goal;

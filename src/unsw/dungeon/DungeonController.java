@@ -66,6 +66,14 @@ public class DungeonController {
             break;
         }
     }
+    
+    /*
+    @FXML
+    public void checkGoalsComplete() {
+        if (dungeon.checkGoal()){
+        	System.exit(1);
+        }
+    }*/
 
 }
 

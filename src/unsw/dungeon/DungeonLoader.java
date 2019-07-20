@@ -48,7 +48,7 @@ public abstract class DungeonLoader {
         return dungeon;
     }
     
-    private GoalComponentsComplete loadGoal(JSONObject json){
+    public GoalComponentsComplete loadGoal(JSONObject json){
     	String goalName = json.getString("goal");
     	GoalComponentsComplete goalObj;
     	
@@ -62,7 +62,7 @@ public abstract class DungeonLoader {
     	return goalObj;
     }
     
-    private Goal loadSimple(String goal){
+    public Goal loadSimple(String goal){
     	Goal simpleGoal = null;
     	
     	switch (goal) {
@@ -73,7 +73,7 @@ public abstract class DungeonLoader {
     	return simpleGoal;
     }
     
-    private ComplexGoal loadComplex(String goal, JSONArray subGoals){
+    public ComplexGoal loadComplex(String goal, JSONArray subGoals){
     	GoalComponentsComplete goal1 = null;
 		GoalComponentsComplete goal2 = null;
 		ComplexGoal complexGoal = null;
@@ -96,7 +96,7 @@ public abstract class DungeonLoader {
 		return complexGoal;
     }
     
-    private void loadEntity(Dungeon dungeon, JSONObject json) {
+    public void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");
         int y = json.getInt("y");

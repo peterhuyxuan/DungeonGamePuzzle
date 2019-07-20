@@ -1,0 +1,21 @@
+{
+  "goal-condition": {
+    "goal": "AND",
+    "subgoals": [
+      {
+        "goal": "exit"
+      },
+      {
+        "goal": "OR",
+        "subgoals": [
+          {
+            "goal": "treasure"
+          },
+          {
+            "goal": "boulders"
+          }
+        ]
+      }
+    ]
+  }  
+}
