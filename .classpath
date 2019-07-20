@@ -4,6 +4,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="images"/>
 	<classpathentry kind="lib" path="lib/json.jar"/><classpat kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>entry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
->>>>>>> a4fab117c120de3afb3a909cc45981f4ab120e13
 	<classpathentry kind="output" path="bin"/>
 </classpath>
