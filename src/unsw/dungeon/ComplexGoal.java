@@ -26,4 +26,13 @@ public class ComplexGoal implements GoalComponentsComplete{
 			return goal1.checkGoalComponent(D) || goal2.checkGoalComponent(D);
 		}
 	}
+
+	public GoalComponentsComplete getGoal1() {
+		return goal1;
+	}
+
+	public GoalComponentsComplete getGoal2() {
+		return goal2;
+	}
+	
 }

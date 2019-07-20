@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 //import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 
 class TestGoal {
 
@@ -25,7 +25,7 @@ class TestGoal {
 //		System.out.println(exitTest.checkGoal());
 //	}
 
-	@Test
+//@Test
 	void testExitGoal() {
 		Dungeon exitTest = new Dungeon(2,1);
 		GoalCondition gc = new ExitGoal();
@@ -43,7 +43,7 @@ class TestGoal {
 		assert(exitTest.checkGoal() == true);
 	}
 	
-	@Test
+//	@Test
 	void testTreasureGoal() {
 		Dungeon treasureTest = new Dungeon(3,1);
 		// Add Treasure
@@ -75,7 +75,7 @@ class TestGoal {
 		assert(treasureTest.checkGoal() == false); 
 	}
 	
-	@Test
+//	@Test
 	void testFloorSwitchOff() {
 		Dungeon switchOffTest = new Dungeon(1,3);
 		GoalCondition gc = new SwitchTrigger();
@@ -91,7 +91,7 @@ class TestGoal {
 		assert(switchOffTest.checkGoal() == false);
 	}
 	
-	@Test
+	//@Test
 	void testFloorSwitchOn() {
 		Dungeon switchOnTest = new Dungeon(1,3);
 		GoalCondition gc = new SwitchTrigger();
