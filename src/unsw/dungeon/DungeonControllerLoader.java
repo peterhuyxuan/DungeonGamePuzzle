@@ -49,7 +49,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         doorImage = new Image("closed_door.png");
         enemyImage = new Image("deep_elf_master_archer.png");
         swordImage = new Image("greatsword_1_new.png");
-        //potionImage = new Image("brillant_blue_new.png");
+        potionImage = new Image("bubbly.png");
         treasureImage = new Image("gold_pile.png");
         bombImage = new Image("bomb_unlit.png");
         

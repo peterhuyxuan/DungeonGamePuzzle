@@ -11,7 +11,7 @@ import java.util.List;
 public class Player extends Entity implements Moveable, Observable {
 
     private Dungeon dungeon;
-    public ArrayList<Entity> enemies;
+    public ArrayList<Enemy> enemies;
 
     /**
      * Create a player positioned in square (x,y)
@@ -21,12 +21,16 @@ public class Player extends Entity implements Moveable, Observable {
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
+        this.enemies = dungeon.enemyList();
     }
 
     @Override
     public void moveUp() {
-    
+    	
     	Entity aboveEntity = getAboveTile();
+    	if (!enemies.isEmpty()){
+    		enemies.get(0).move();
+    	}
     	
     	if (aboveEntity instanceof Wall){
         	return; 
@@ -50,6 +54,9 @@ public class Player extends Entity implements Moveable, Observable {
     public void moveDown() {
     	
     	Entity belowEntity = getBelowTile();
+    	if (!enemies.isEmpty()){
+    		notifyObservers();
+    	}
     	
     	if (belowEntity instanceof Wall) {
     		return;    		
@@ -71,6 +78,9 @@ public class Player extends Entity implements Moveable, Observable {
     public void moveLeft() {
     	
     	Entity leftEntity = getLeftTile();
+    	if (!enemies.isEmpty()){
+    		notifyObservers();
+    	}
     	
     	if (leftEntity instanceof Wall) {
     		return;   		
@@ -92,6 +102,9 @@ public class Player extends Entity implements Moveable, Observable {
     public void moveRight() {
     	
     	Entity rightEntity = getRightTile();
+    	if (!enemies.isEmpty()){
+    		notifyObservers();
+    	}
     	
     	if (rightEntity instanceof Wall) {
     		return;
@@ -139,7 +152,9 @@ public class Player extends Entity implements Moveable, Observable {
 
 	@Override
 	public void notifyObservers() {
-		// TODO Auto-generated method stub
+		for (Enemy enemy : enemies){
+			enemy.update();
+		}
 	}
     
     /*	BUGGED

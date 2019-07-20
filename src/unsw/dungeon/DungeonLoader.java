@@ -140,11 +140,11 @@ public abstract class DungeonLoader {
 	        entity = door;
 	        break;
        case "enemy":
-  	    	Enemy enemy = new Enemy(x, y);
+  	    	Enemy enemy = new Enemy(dungeon, x, y);
 	   	    onLoad(enemy);
 	        entity = enemy;
 	        break;
-       case "invincibility":
+       case "potion":
   	    	Potion potion = new Potion(x, y);
 	   	    onLoad(potion);
 	        entity = potion;

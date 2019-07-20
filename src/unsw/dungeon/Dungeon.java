@@ -55,6 +55,16 @@ public class Dungeon {
         if (entity instanceof Wall || entity instanceof Boulder) setTile(entity, x, y);
     }
     
+    public ArrayList<Enemy> enemyList(){
+    	ArrayList<Enemy> enemies = new ArrayList<>();
+    	for (Entity e : this.entities){
+    		if (e instanceof Enemy){
+    			enemies.add((Enemy)e);
+    		}
+    	}
+    	return enemies;
+    }
+    
     public Entity getTile(int x, int y){
 		return  WallBoulder2DArray[x][y];  	
     }
