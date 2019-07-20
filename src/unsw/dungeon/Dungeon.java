@@ -5,6 +5,9 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.List;
+//import javafx.beans.property.IntegerProperty;
+//import javafx.beans.property.SimpleIntegerProperty;
+
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -68,6 +71,22 @@ public class Dungeon {
     	return player.getY();
     }
     
+    public void playerMoveUp() {
+    	player.moveUp();
+    }
+    
+    public void playerMoveDown() {
+    	player.moveDown();
+    }
+    
+    public void playerMoveLeft() {
+    	player.moveLeft();
+    }
+
+    public void playerMoveRight() {
+    	player.moveRight();
+    }
+    
     public Entity getExit() {
     	for (Entity entity : entities){
     		if (entity instanceof Exit){
@@ -105,6 +124,8 @@ public class Dungeon {
     }
 
 
+
+
 	public GoalComponentsComplete getGoal() {
 		return goal;
 	}
@@ -112,6 +133,4 @@ public class Dungeon {
 	public void setGoal(GoalComponentsComplete goal) {
 		this.goal = goal;
 	}
-    
-    
 }
