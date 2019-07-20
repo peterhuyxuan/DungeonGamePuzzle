@@ -159,7 +159,7 @@ public abstract class DungeonLoader {
 	   	    dungeon.addItem(entity);
 	        break;
        case "treasure":
-  	    	Treasure treasure = new Treasure(x, y);
+  	    	Treasure treasure = new Treasure(x, y, false);
 	   	    onLoad(treasure);
 	        entity = treasure;
 	        dungeon.addItem(entity);
