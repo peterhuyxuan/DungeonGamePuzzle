@@ -8,9 +8,10 @@ import java.util.List;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity implements Moveable {
+public class Player extends Entity implements Moveable, Observable {
 
     private Dungeon dungeon;
+    public ArrayList<Entity> enemies;
 
     /**
      * Create a player positioned in square (x,y)
@@ -135,6 +136,11 @@ public class Player extends Entity implements Moveable {
     public Entity getRightTile(){
 		return  this.dungeon.getTile(getX() + 1, getY());  	
     }
+
+	@Override
+	public void notifyObservers() {
+		// TODO Auto-generated method stub
+	}
     
     /*	BUGGED
     public void movePositionUp(){
