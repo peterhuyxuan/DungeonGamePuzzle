@@ -85,8 +85,13 @@ public class Dungeon {
     
     
     public boolean EnemyDies() {
-    	if (player.hasSword()) {
+    	if (player.hasPotion()){
+    		return true;
+    	} else if (player.hasSword()) {
     		player.hitSword();
+    		if (player.getSword().getStrikes() == 0){
+    			player.removeSword();
+    		}
     		return true;
     	}
     	return false;
@@ -95,9 +100,13 @@ public class Dungeon {
     public Entity itemPickUp(){
     	for (Entity item : items){
     		if (player.getX() == item.getX() && player.getY() == item.getY()){
+    			
     			if (item instanceof Sword) {
     				player.pickUpSword();
+    			} else if (item instanceof Potion) {
+    				player.pickUpPotion();
     			}
+    			// TODO Add more items
     			removeEntity(item);
     			removeItem(item);
     			return item;

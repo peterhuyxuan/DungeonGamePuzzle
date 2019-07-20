@@ -14,6 +14,7 @@ public class Player extends Entity implements Moveable, Observable {
     public ArrayList<Enemy> enemies;
     public ArrayList<Entity> inventory;
     public ArrayList<Sword> swords;
+    public ArrayList<Potion> potions;
 
     /**
      * Create a player positioned in square (x,y)
@@ -26,17 +27,12 @@ public class Player extends Entity implements Moveable, Observable {
         this.enemies = dungeon.enemyList();
         this.inventory = new ArrayList<>();
         this.swords = new ArrayList<>();
+        this.potions = new ArrayList<>();
     }
 
     @Override
     public void moveUp() {
-    	updateEnemyList();
     	Entity aboveEntity = getAboveTile();
-    	
-    	if (!enemies.isEmpty()){
-    		notifyObservers();
-    	}
-    	
     	if (aboveEntity instanceof Wall){
         	return; 
     	} else if (aboveEntity instanceof Boulder) {
@@ -44,86 +40,77 @@ public class Player extends Entity implements Moveable, Observable {
     		
     		if (boulder.canMoveUp()){
     			boulder.moveUp();
-    			y().set(getY() - 1);
+    			this.movePlayerUp();
     			return;
     		} else {
     			return;
     		}
     		
         } else {
-            y().set(getY() - 1);
+        	this.movePlayerUp();
         }
     }
 
     @Override
     public void moveDown() {
-    	updateEnemyList();
+
     	Entity belowEntity = getBelowTile();
-    	if (!enemies.isEmpty()){
-    		notifyObservers();
-    	}
-    	
+
     	if (belowEntity instanceof Wall) {
     		return;    		
     	} else if (belowEntity instanceof Boulder) {
     		Boulder boulder = (Boulder)belowEntity;   		
     		if (boulder.canMoveDown()){
     			boulder.moveDown();
-    			y().set(getY() + 1);
+        		this.movePlayerDown();
     			return;
     		} else {
     			return;
     		} 		
     	} else {
-            y().set(getY() + 1);
+    		this.movePlayerDown();
     	}
     }
 
     @Override
     public void moveLeft() {
-    	updateEnemyList();
+
     	Entity leftEntity = getLeftTile();
-    	if (!enemies.isEmpty()){
-    		notifyObservers();
-    	}
-    	
+
     	if (leftEntity instanceof Wall) {
     		return;   		
     	} else if (leftEntity instanceof Boulder) {
     		Boulder boulder = (Boulder)leftEntity;   		
     		if (boulder.canMoveLeft()){
     			boulder.moveLeft();
-    			x().set(getX() - 1);
+    			this.movePlayerLeft();
     			return;
     		} else {
     			return;
     		}   		
     	} else {
-            x().set(getX() - 1);
+    		this.movePlayerLeft();
     	}
     }
 
     @Override
     public void moveRight() {
-    	updateEnemyList();
+
     	Entity rightEntity = getRightTile();
-    	if (!enemies.isEmpty()){
-    		notifyObservers();
-    	}
-    	
+
     	if (rightEntity instanceof Wall) {
     		return;
     	} else if (rightEntity instanceof Boulder) {
     		Boulder boulder = (Boulder)rightEntity;   		
     		if (boulder.canMoveRight()){
     			boulder.moveRight();
-    			x().set(getX() + 1);
+    			this.movePlayerRight();
     			return;
     		} else {
     			return;
     		}   		
     	}  else {
-            x().set(getX() + 1);
+            this.movePlayerRight();
     	}
     }
     
@@ -138,6 +125,33 @@ public class Player extends Entity implements Moveable, Observable {
 		 	return entities;
     }
     
+    public void movePlayerUp(){
+	    if (this.hasPotion()){
+			this.usePotion();
+		}
+	    y().set(getY() - 1);
+    }
+    
+    public void movePlayerDown(){
+	    if (this.hasPotion()){
+			this.usePotion();
+		}
+	    y().set(getY() + 1);
+    }
+    
+    public void movePlayerRight(){
+	    if (this.hasPotion()){
+			this.usePotion();
+		}
+	    x().set(getX() + 1);
+    }
+    
+    public void movePlayerLeft(){
+	    if (this.hasPotion()){
+			this.usePotion();
+		}
+	    x().set(getX() - 1);
+    }
     @Override
     public Entity getAboveTile(){
 		return  this.dungeon.getTile(getX(), getY() - 1);  	
@@ -199,6 +213,33 @@ public class Player extends Entity implements Moveable, Observable {
 	public Sword getSword(){
 		return swords.get(0);
 	}
+	
+	public void removeSword(){
+		swords.remove(0);
+	}
+	
+	public void pickUpPotion(){
+		Potion potion = new Potion(0,0);
+		potions.add(potion);
+	}
+	
+	public boolean hasPotion(){
+		return !potions.isEmpty();
+	}
+	
+	public Potion getPotion(){
+		return potions.get(0);
+	}
+	
+	public void usePotion(){
+		Potion potion = getPotion();
+		potion.degrade();
+	}
+	
+	public void removePotion(){
+		potions.remove(0);
+	}
+	
     /*	BUGGED
     public void movePositionUp(){
     	 y().set(getY() + 1);
