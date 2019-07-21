@@ -240,4 +240,13 @@ public class Dungeon {
     public List<SwitchTrigger> getSwitchTriggers() {
 		return switchTriggers;
 	}
+	
+	public boolean isIncinerated(Entity entity, Bomb b) {
+		if (b.isExploded() == true) {
+	    	if ((entity.getX() >= b.getX() - 1 && entity.getX() <= b.getX() + 1) &&
+				(entity.getY() >= b.getY() - 1 && entity.getY() <= b.getY() + 1)) 
+				return true;
+		}
+		return false;
+	}
 }
