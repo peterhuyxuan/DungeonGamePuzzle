@@ -1,8 +1,8 @@
 package unsw.dungeon;
 
 import java.util.Timer;
-
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Bomb extends Entity {
     private boolean pickedUp;
@@ -30,9 +30,11 @@ public class Bomb extends Entity {
 		this.exploded = exploded;
 	}
 	
-	public void plantBomb(IntegerProperty x, IntegerProperty y) {
-		this.setX(x);
-		this.setY(y);
+	public void plantBomb(int x, int y) {
+		IntegerProperty xInt = new SimpleIntegerProperty(x);
+		IntegerProperty yInt = new SimpleIntegerProperty(y);
+		this.setX(xInt);
+		this.setY(yInt);
 		setPickedUp(false);
 		Timer t = new java.util.Timer();
 		t.schedule( 
