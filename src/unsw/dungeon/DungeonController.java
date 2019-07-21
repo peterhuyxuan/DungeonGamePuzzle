@@ -50,6 +50,11 @@ public class DungeonController {
     // This game is pseudo turn based
     @FXML
     public void handleKeyPress(KeyEvent event) {
+    	
+    	if (!player.isAlive()){
+    		return;
+    	}
+    	
         switch (event.getCode()) {
         case UP:
             player.moveUp();

@@ -81,7 +81,7 @@ public class Dungeon {
     			if (EnemyDies()){
     				removeEntity(enemy);
     			} else {
-    				// player dies
+    				player.setAlive(false);
     			}
     		}
     	}

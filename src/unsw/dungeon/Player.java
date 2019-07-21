@@ -15,6 +15,7 @@ public class Player extends Entity implements Moveable, Observable {
     public ArrayList<Entity> inventory;
     public ArrayList<Sword> swords;
     public ArrayList<Potion> potions;
+    boolean Alive;
 
     /**
      * Create a player positioned in square (x,y)
@@ -28,9 +29,21 @@ public class Player extends Entity implements Moveable, Observable {
         this.inventory = new ArrayList<>();
         this.swords = new ArrayList<>();
         this.potions = new ArrayList<>();
+        this.Alive = true;
     }
 
-    @Override
+    
+    public boolean isAlive() {
+		return Alive;
+	}
+
+
+	public void setAlive(boolean alive) {
+		Alive = alive;
+	}
+
+
+	@Override
     public void moveUp() {
     	Entity aboveEntity = getAboveTile();
     	if (aboveEntity instanceof Wall){
