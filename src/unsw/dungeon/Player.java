@@ -126,31 +126,23 @@ public class Player extends Entity implements Moveable, Observable {
     }
     
     public void movePlayerUp(){
-	    if (this.hasPotion()){
-			this.usePotion();
-		}
 	    y().set(getY() - 1);
+	    notifyObservers();
     }
     
     public void movePlayerDown(){
-	    if (this.hasPotion()){
-			this.usePotion();
-		}
 	    y().set(getY() + 1);
+	    notifyObservers();
     }
     
     public void movePlayerRight(){
-	    if (this.hasPotion()){
-			this.usePotion();
-		}
 	    x().set(getX() + 1);
+	    notifyObservers();
     }
     
     public void movePlayerLeft(){
-	    if (this.hasPotion()){
-			this.usePotion();
-		}
 	    x().set(getX() - 1);
+	    notifyObservers();
     }
     @Override
     public Entity getAboveTile(){
@@ -174,6 +166,14 @@ public class Player extends Entity implements Moveable, Observable {
 		for (Enemy enemy : enemies){
 			enemy.update(this.hasPotion());
 		}
+		Potion potion = null;
+		if (!potions.isEmpty()) {
+			potion = this.getPotion();
+			if (potion.update() == 0) {
+				potions.remove(potion);
+			}
+		}
+		
 	}
 	
 	public void updateEnemyList(){
@@ -231,10 +231,13 @@ public class Player extends Entity implements Moveable, Observable {
 		return potions.get(0);
 	}
 	
-	public void usePotion(){
-		Potion potion = getPotion();
-		potion.degrade();
-	}
+	/*
+	public void usePotion(Potion potion){
+		potion.update();
+		if (potion.getMoves() == 0){
+			potions.remove(potion);
+		}
+	}*/
 	
 	public void removePotion(){
 		potions.remove(0);

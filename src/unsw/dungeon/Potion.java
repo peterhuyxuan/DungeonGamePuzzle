@@ -1,15 +1,17 @@
 package unsw.dungeon;
 
-public class Potion extends Entity {
+public class Potion extends Entity implements Observer{
 	
-	public int moves = 10;
+	public int moves = 20;
 	
     public Potion(int x, int y) {
         super(x, y);   
     }
     
-    public void degrade(){
+    public int degrade(){
     	setMoves(getMoves() -1);
+    	System.out.println("PLayer sips potion now has charrges: " + this.getMoves());
+    	return this.getMoves();
     }
 
 	public int getMoves() {
@@ -18,6 +20,16 @@ public class Potion extends Entity {
 
 	public void setMoves(int moves) {
 		this.moves = moves;
+	}
+
+	@Override
+	public int update() {
+		return this.degrade();
+	}
+
+	@Override
+	public void update(boolean hasPotion) {
+		
 	}
 
 	

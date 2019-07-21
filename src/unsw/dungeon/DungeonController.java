@@ -81,9 +81,6 @@ public class DungeonController {
         	//squares.getChildren().add(entity);
         //}   
         player.updateEnemyList();
-        if (!player.getEnemies().isEmpty()){
-    		player.notifyObservers();
-    	}
         dungeon.checkPlayerEnemyCollision();
         //System.out.println("HELLo");
         //System.out.println("WHATTS");
