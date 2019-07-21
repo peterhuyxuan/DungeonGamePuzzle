@@ -126,9 +126,10 @@ public class Dungeon {
     
     public void setTile(Entity e, int x, int y){
     	//if (e instanceof Door) System.out.println("Adding door to array at" + x + y);
-    	if (e instanceof Wall || e instanceof Boulder || e instanceof Door) WallBoulderDoor2DArray[x][y] = e;
+    	if (e instanceof Wall || e instanceof Boulder || e instanceof Door || e instanceof Treasure) WallBoulderDoor2DArray[x][y] = e;
     	//if (WallBoulderDoor2DArray[x][y] instanceof Door) System.out.println("added door");
     }
+   
     
     public Entity[][] getWallBoulder2DArray() {
 		return WallBoulderDoor2DArray;
