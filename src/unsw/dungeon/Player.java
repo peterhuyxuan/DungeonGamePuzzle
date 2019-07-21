@@ -15,6 +15,8 @@ public class Player extends Entity implements Moveable, Observable {
     public ArrayList<Entity> inventory;
     public ArrayList<Sword> swords;
     public ArrayList<Potion> potions;
+    public ArrayList<Key> keys;
+    public ArrayList<Bomb> bombs;
     boolean Alive;
 
     /**
@@ -29,6 +31,8 @@ public class Player extends Entity implements Moveable, Observable {
         this.inventory = new ArrayList<>();
         this.swords = new ArrayList<>();
         this.potions = new ArrayList<>();
+        this.bombs = new ArrayList<>();
+        this.keys = new ArrayList<>();
         this.Alive = true;
     }
 
@@ -58,6 +62,15 @@ public class Player extends Entity implements Moveable, Observable {
     		} else {
     			return;
     		}
+    	} else if (aboveEntity instanceof Door) { 
+    		Door door = (Door)aboveEntity;  
+    		this.openDoor(door);
+    		if (door.isOpened()){
+    			this.movePlayerUp();
+    			return;
+    		} else {
+    			return;
+    		}  
     		
         } else {
         	this.movePlayerUp();
@@ -66,7 +79,7 @@ public class Player extends Entity implements Moveable, Observable {
 
     @Override
     public void moveDown() {
-
+    	
     	Entity belowEntity = getBelowTile();
 
     	if (belowEntity instanceof Wall) {
@@ -79,7 +92,16 @@ public class Player extends Entity implements Moveable, Observable {
     			return;
     		} else {
     			return;
-    		} 		
+    		} 
+    	} else if (belowEntity instanceof Door) { 
+    		Door door = (Door)belowEntity; 
+    		this.openDoor(door);
+    		if (door.isOpened()){
+    			this.movePlayerDown();
+    			return;
+    		} else {
+    			return;
+    		}  
     	} else {
     		this.movePlayerDown();
     	}
@@ -100,7 +122,16 @@ public class Player extends Entity implements Moveable, Observable {
     			return;
     		} else {
     			return;
-    		}   		
+    		}
+    	} else if (leftEntity instanceof Door) { 
+    		Door door = (Door)leftEntity;  
+    		this.openDoor(door);
+    		if (door.isOpened()){
+    			this.movePlayerLeft();
+    			return;
+    		} else {
+    			return;
+    		}  
     	} else {
     		this.movePlayerLeft();
     	}
@@ -121,21 +152,19 @@ public class Player extends Entity implements Moveable, Observable {
     			return;
     		} else {
     			return;
-    		}   		
+    		}   	
+    	} else if (rightEntity instanceof Door) { 
+    		Door door = (Door)rightEntity; 
+    		this.openDoor(door);
+    		if (door.isOpened()){
+    			this.movePlayerRight();
+    			return;
+    		} else {
+    			return;
+    		}  
     	}  else {
             this.movePlayerRight();
     	}
-    }
-    
-    public ArrayList<Entity> getPlayerTile(){
-    		ArrayList<Entity> entities = new ArrayList<>();
-		 	List<Entity> dungeonEntities = dungeon.getEntities();
-		 	for (Entity e : dungeonEntities){
-		 		if (e.getX() == getX() && e.getY() == getY()){
-		 			entities.add(e);
-		 		}
-		 	}
-		 	return entities;
     }
     
     public void movePlayerUp(){
@@ -157,6 +186,7 @@ public class Player extends Entity implements Moveable, Observable {
 	    x().set(getX() - 1);
 	    notifyObservers();
     }
+    
     @Override
     public Entity getAboveTile(){
 		return  this.dungeon.getTile(getX(), getY() - 1);  	
@@ -173,6 +203,20 @@ public class Player extends Entity implements Moveable, Observable {
     public Entity getRightTile(){
 		return  this.dungeon.getTile(getX() + 1, getY());  	
     }
+    
+    public ArrayList<Entity> getPlayerTile(){
+    		ArrayList<Entity> entities = new ArrayList<>();
+		 	List<Entity> dungeonEntities = dungeon.getEntities();
+		 	for (Entity e : dungeonEntities){
+		 		if (e.getX() == getX() && e.getY() == getY()){
+		 			entities.add(e);
+		 		}
+		 	}
+		 	return entities;
+    }
+    
+    
+    
 
 	@Override
 	public void notifyObservers() {
@@ -200,15 +244,31 @@ public class Player extends Entity implements Moveable, Observable {
 	public void setEnemies(ArrayList<Enemy> enemies) {
 		this.enemies = enemies;
 	}
+	
+	public boolean EnemyDies() {
+    	if (this.hasPotion()){
+    		return true;
+    	} else if (this.hasSword()) {
+    		this.hitSword();
+    		if (this.getSword().getStrikes() == 0){
+    			this.removeSword();
+    		}
+    		return true;
+    	}
+    	return false;
+    }
     
-	public void pickUpItem(Entity item){
-		inventory.add(item);
-	}
+    
+	//public void pickUpItem(Entity item){
+	//	inventory.add(item);
+	//}
 
 	public ArrayList<Entity> getInventory() {
 		return inventory;
 	}
 	
+	
+	// sword methods
 	public void pickUpSword(){
 		Sword sword = new Sword(0,0);
 		swords.add(sword);
@@ -231,6 +291,8 @@ public class Player extends Entity implements Moveable, Observable {
 		swords.remove(0);
 	}
 	
+	
+	// potions methods
 	public void pickUpPotion(){
 		Potion potion = new Potion(0,0);
 		potions.add(potion);
@@ -244,22 +306,27 @@ public class Player extends Entity implements Moveable, Observable {
 		return potions.get(0);
 	}
 	
-	/*
-	public void usePotion(Potion potion){
-		potion.update();
-		if (potion.getMoves() == 0){
-			potions.remove(potion);
-		}
-	}*/
-	
 	public void removePotion(){
 		potions.remove(0);
 	}
 	
-    /*	BUGGED
-    public void movePositionUp(){
-    	 y().set(getY() + 1);
-    }
-    */
+	
+	//key methods
+	public void pickUpKey(Key key){
+		this.keys.add(key);
+	}
+	
+	public void openDoor(Door door){
+		for (Key key : keys){
+			if (key.getId() == door.getId()) {
+				door.setOpened(true);
+			}
+		}
+	}
+	
+	public void removeKey(Key key){
+		this.keys.remove(key);
+	}
+		
     
 }
