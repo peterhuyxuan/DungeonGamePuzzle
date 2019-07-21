@@ -47,28 +47,48 @@ public class DungeonController {
 
     }
 
+    // This game is pseudo turn based
     @FXML
     public void handleKeyPress(KeyEvent event) {
+    	
+    	if (!player.isAlive()){
+    		return;
+    	}
+    	
         switch (event.getCode()) {
         case UP:
             player.moveUp();
-            dungeon.update2DArray();
             break;
         case DOWN:
             player.moveDown();
-            dungeon.update2DArray();
             break;
         case LEFT:
             player.moveLeft();
-            dungeon.update2DArray();
             break;
         case RIGHT:
             player.moveRight();
-            dungeon.update2DArray();
             break;
         default:
             break;
         }
+        dungeon.update2DArray();
+        
+        // Concurrency error if set to void???? 
+        Entity item = dungeon.itemPickUp();
+        
+        //if (!(item == null)){
+        	//System.out.println("Removing Item");
+        	//initialEntities.remove(item);
+        	//ImageView image = initialEntities.get(item.getX() * item.getY());
+        	//squares.getChildren().remove(image);
+        	//Image ground = new Image("/dirt_0_new.png");
+        	//squares.add(new ImageView(ground), item.getX(), item.getY());
+        	//squares.getChildren().add(entity);
+        //}   
+        player.updateEnemyList();
+        dungeon.checkPlayerEnemyCollision();
+        //System.out.println("HELLo");
+        //System.out.println("WHATTS");
     }
     
     /*

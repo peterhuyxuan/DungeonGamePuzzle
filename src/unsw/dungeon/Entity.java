@@ -39,4 +39,12 @@ public class Entity {
     public int getX() {
         return x().get();
     }
+    
+    public void setX(IntegerProperty x) {
+		this.x = x;
+	}
+
+	public void setY(IntegerProperty y) {
+		this.y = y;
+	}
 }

@@ -2,12 +2,18 @@ package unsw.dungeon;
 
 public class SwitchTrigger implements GoalCondition {
 	@Override
-	public boolean checkGoal(Dungeon D){
-		Entity boulder = D.getBoulder();
-		Entity floorSwitch = D.getFloorSwitch();
-		boolean currentGoalCondition = false;
-		if (boulder.getX() == floorSwitch.getX() && boulder.getY() == (floorSwitch.getY() - 1))
-			currentGoalCondition = true;
-		return currentGoalCondition;
+	public boolean checkGoal(Dungeon D) {
+//		boolean currentGoalCondition = true;
+		for (Entity entity : D.getEntities()) {
+			if (entity instanceof FloorSwitch) {
+				if (!(D.getTile(entity.getX(), entity.getY() - 1) instanceof Boulder)) {
+//					currentGoalCondition = false;
+//					break;
+					return false;
+				}
+			}
+		}
+		return true;
+//		return currentGoalCondition;
 	}
 }

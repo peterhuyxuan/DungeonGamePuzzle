@@ -103,6 +103,12 @@
       "type": "player"
     },
     {
+      "x": 5,
+      "y": 1,
+      "id": 1,
+      "type": "key"
+    },
+    {
       "x": 6,
       "y": 1,
       "type": "sword"
@@ -305,7 +311,8 @@
     {
       "x": 5,
       "y": 8,
-      "type": "wall"
+      "id": 1,
+      "type": "door"
     },
     {
       "x": 6,

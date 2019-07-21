@@ -3,30 +3,42 @@ package unsw.dungeon;
 public class Enemy extends Entity implements Observer {
 	
 	Dungeon dungeon;
+	EnemyMove moveState;
 	
     public Enemy(Dungeon dungeon, int x, int y) {
         super(x, y);   
         this.dungeon = dungeon;
+        this.moveState = new AttackMove();
+    }
+    
+    public void makeEvade(){
+    	moveState = moveState.makeEvade();
+    }
+    
+    public void makeAttack(){
+    	moveState = moveState.makeAttack();
     }
 
+    
 	public void move() {
+		//System.out.println("howdy");
 		int xDiff = xDiff();
 		int yDiff = yDiff();
 		
 		if (Math.abs(xDiff) > Math.abs(yDiff)){
 			if (xDiff < 0 && this.canMoveLeft()){
-				x().set(getX() - 1);
+				x().set(getX() - moveState.moveDirection(1));
 				return;
 			} else if (xDiff > 0 && this.canMoveRight()) {
-				x().set(getX() + 1);
+				x().set(getX() + moveState.moveDirection(1));
 				return;
 			}
 		}
 		if (yDiff < 0 && this.canMoveUp()){
-			 y().set(getY() - 1);
+			 y().set(getY() - moveState.moveDirection(1));
 			return;
 		} else if (yDiff > 0 && this.canMoveDown()) {
-			 y().set(getY() + 1);
+			 y().set(getY() + moveState.moveDirection(1));
 			return;
 		}
 	}
@@ -41,31 +53,20 @@ public class Enemy extends Entity implements Observer {
 		return playerY - this.getY();
 	}
 	
-	/*
-	public String findVerticalDirection(){
-		int yDirection = yDiff();
-		if (yDirection )
-	}
-	
-	public String findHorizontalDirection(){
-		
-	}*/
-
-	
     public Entity getAboveTile(){
-		return  this.dungeon.getTile(getX(), getY() - 1);  	
+		return  this.dungeon.getTile(getX(), getY() - moveState.moveDirection(1));  	
     }
     
     public Entity getBelowTile(){
-		return  this.dungeon.getTile(getX(), getY() + 1);  	
+		return  this.dungeon.getTile(getX(), getY() + moveState.moveDirection(1));  	
     }
     
     public Entity getLeftTile(){
-		return  this.dungeon.getTile(getX() - 1, getY());  	
+		return  this.dungeon.getTile(getX() - moveState.moveDirection(1), getY());  	
     }
     
     public Entity getRightTile(){
-		return  this.dungeon.getTile(getX() + 1, getY());  	
+		return  this.dungeon.getTile(getX() + moveState.moveDirection(1), getY());  	
     }
 
     public boolean canMoveUp(){
@@ -101,7 +102,20 @@ public class Enemy extends Entity implements Observer {
     }
 
 	@Override
-	public void update() {
+	public void update(boolean hasPotion) {
+
+		if (hasPotion){
+			//System.out.println("Making Evade");
+			this.makeEvade();
+		} else if (!hasPotion) {
+			//System.out.println("Making Attack");
+			this.makeAttack();
+		}
 		move();
+	}
+
+	@Override
+	public int update() {
+		return 0;
 	}
 }
