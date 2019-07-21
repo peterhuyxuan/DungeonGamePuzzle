@@ -2,6 +2,8 @@ package unsw.dungeon;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Timer;
+
 import org.junit.jupiter.api.Test;
 
 class TestBomb {
@@ -14,6 +16,16 @@ class TestBomb {
 		bombTest.setPlayer(playerTest);
 		assert(bomb.getX() == 0 && bomb.getY() == 0);
 		bomb.plantBomb(playerTest.getX(), playerTest.getY());
+		Timer t = new java.util.Timer();
+		t.schedule( 
+		        new java.util.TimerTask() {
+		            @Override
+		            public void run() {
+		            	assert(bombTest.isIncinerated(playerTest, bomb) == true);
+		            }
+		        }, 
+		        5000 
+		);
 	}
 	
 	@Test
