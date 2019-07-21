@@ -3,7 +3,7 @@ package unsw.dungeon;
 public class Treasure extends Entity {
     private boolean pickedUp;
 	
-	public Treasure(int x, int y, boolean pickedUp) {
+	public Treasure(int x, int y) {
 		super(x, y);   
 		this.setPickedUp(false);
     }
