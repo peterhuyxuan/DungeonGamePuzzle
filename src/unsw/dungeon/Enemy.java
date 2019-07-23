@@ -24,24 +24,34 @@ public class Enemy extends Entity implements Observer {
 		//System.out.println("howdy");
 		int xDiff = xDiff();
 		int yDiff = yDiff();
-		
+		boolean moved = false;
 		if (Math.abs(xDiff) > Math.abs(yDiff)){
 			if (xDiff < 0 && this.canMoveLeft()){
 				x().set(getX() - moveState.moveDirection(1));
-				return;
+				moved = true;
 			} else if (xDiff > 0 && this.canMoveRight()) {
 				x().set(getX() + moveState.moveDirection(1));
-				return;
+				moved = true;
 			}
 		}
-		if (yDiff < 0 && this.canMoveUp()){
+		if (yDiff < 0 && this.canMoveUp() && moved == false){
 			 y().set(getY() - moveState.moveDirection(1));
-			return;
-		} else if (yDiff > 0 && this.canMoveDown()) {
+			 moved = true;
+		} else if (yDiff > 0 && this.canMoveDown() && moved == false) {
 			 y().set(getY() + moveState.moveDirection(1));
-			return;
+			 moved = true;
 		}
+		if (xDiff < 0 && this.canMoveLeft() && moved == false){
+			x().set(getX() - moveState.moveDirection(1));
+			moved = true;
+		} else if (xDiff > 0 && this.canMoveRight() && moved == false) {
+			x().set(getX() + moveState.moveDirection(1));
+			moved = true;
+		}
+		
 	}
+		
+	
 
 	public int xDiff(){
 		int playerX = dungeon.getPlayerX();
