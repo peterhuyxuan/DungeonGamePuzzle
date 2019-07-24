@@ -4,7 +4,7 @@ public class EnemyGoal implements GoalCondition {
 	
 	@Override
 	public boolean checkGoal(Dungeon D){
-		if (D.enemyList().isEmpty()){
+		if (D.getEnemies().isEmpty()){
 			return true;
 		} else {
 			return false;

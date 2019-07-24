@@ -78,7 +78,7 @@ public class Dungeon {
     }
     
     
-    public Entity itemPickUp(){
+    public void itemPickUp(){
     	for (Item item : items){
     		if (player.getX() == item.getX() && player.getY() == item.getY()){
     			
@@ -92,10 +92,10 @@ public class Dungeon {
     			// TODO Add more items
     			player.pickUpItem(item);
     			removeItem(item);
-    			return item;
+    			break;
     		}
     	}
-    	return null;
+
     }
     
     public void removeEntity(Entity entity){

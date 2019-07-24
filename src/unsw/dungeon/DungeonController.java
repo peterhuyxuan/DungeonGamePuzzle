@@ -88,7 +88,7 @@ public class DungeonController {
         dungeon.update2DArray();
         
         // Concurrency error if set to void???? 
-        Entity item = dungeon.itemPickUp();
+        dungeon.itemPickUp();
         
         //if (!(item == null)){
         	//System.out.println("Removing Item");
