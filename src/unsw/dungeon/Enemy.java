@@ -18,8 +18,15 @@ public class Enemy extends Entity implements Observer {
     public void makeAttack(){
     	moveState = moveState.makeAttack();
     }
-
     
+	public EnemyMove getMoveState() {
+		return moveState;
+	}
+
+	public void setMoveState(EnemyMove moveState) {
+		this.moveState = moveState;
+	}
+
 	public void move() {
 		//System.out.println("howdy");
 		int xDiff = xDiff();
