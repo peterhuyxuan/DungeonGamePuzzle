@@ -357,6 +357,7 @@ public class Player extends Entity implements Moveable, Observable{
 				if (key.getId() == door.getId()) {
 					door.setOpened(true);
 					removeKey(key);
+					break;
 				}
 			}
 		}
