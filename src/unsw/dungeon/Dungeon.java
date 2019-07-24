@@ -22,7 +22,8 @@ public class Dungeon {
 
     private int width, height;
     private List<Entity> entities;
-    private ArrayList<Entity> items;
+    private ArrayList<Item> items;
+    private ArrayList<Enemy> enemies;
     private Entity[][] WallBoulderDoor2DArray;
     private Player player;
     private GoalComponentsComplete goal;
@@ -32,6 +33,7 @@ public class Dungeon {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<>();
+        this.enemies = new ArrayList<>();
         this.WallBoulderDoor2DArray = new Entity[width][height];
         this.player = null;
         this.items = new ArrayList<>();
@@ -61,25 +63,13 @@ public class Dungeon {
         setTile(entity, x, y);
     }
     
-    public ArrayList<Enemy> enemyList(){
-    	//System.out.println("Making enemy list");
-    	ArrayList<Enemy> enemies = new ArrayList<>();
-    	for (Entity e : this.entities){
-    		//System.out.println("Checking entity");
-    		if (e instanceof Enemy){
-    			//System.out.println("Entity is enemy");
-    			enemies.add((Enemy)e);
-    		}
-    	}
-    	return enemies;
-    }
-    
+
     public void checkPlayerEnemyCollision(){
-    	ArrayList<Enemy> enemies = this.enemyList();
     	for (Enemy enemy : enemies){
     		if (enemy.getX() == player.getX() && enemy.getY() == player.getY()){
     			if (player.EnemyDies()){
     				removeEntity(enemy);
+    				player.removeEnemy(enemy);
     			} else {
     				player.setAlive(false);
     			}
@@ -89,18 +79,18 @@ public class Dungeon {
     
     
     public Entity itemPickUp(){
-    	for (Entity item : items){
+    	for (Item item : items){
     		if (player.getX() == item.getX() && player.getY() == item.getY()){
     			
-    			if (item instanceof Sword) {
-    				player.pickUpSword();
-    			} else if (item instanceof Potion) {
-    				player.pickUpPotion();
-    			} else if (item instanceof Key) {
-    				player.pickUpKey((Key)item);
-    			}
+    			//if (item instanceof Sword) {
+    			//	player.pickUpSword();
+    			//} else if (item instanceof Potion) {
+    			//	player.pickUpPotion();
+    			//} else if (item instanceof Key) {
+    				//player.pickUpKey((Key)item);
+    			//}
     			// TODO Add more items
-    			removeEntity(item);
+    			player.pickUpItem(item);
     			removeItem(item);
     			return item;
     		}
@@ -112,7 +102,7 @@ public class Dungeon {
     	entities.remove(entity);
     }
     
-    public void addItem(Entity item){
+    public void addItem(Item item){
     	items.add(item);
     }
     
@@ -124,7 +114,24 @@ public class Dungeon {
 		return  WallBoulderDoor2DArray[x][y];  	
     }
     
-    public void setTile(Entity e, int x, int y){
+    public void addEnemy(Enemy enemy){
+    	this.enemies.add(enemy);
+    	this.player.addEnemy(enemy);
+    }
+    
+    public void removeEnemy(Enemy enemy){
+    	this.enemies.remove(enemy);
+    }
+    
+    public ArrayList<Enemy> getEnemies() {
+		return enemies;
+	}
+
+	public void setEnemies(ArrayList<Enemy> enemies) {
+		this.enemies = enemies;
+	}
+
+	public void setTile(Entity e, int x, int y){
     	//if (e instanceof Door) System.out.println("Adding door to array at" + x + y);
     	if (e instanceof Wall || e instanceof Boulder || e instanceof Door || e instanceof Treasure) WallBoulderDoor2DArray[x][y] = e;
     	//if (WallBoulderDoor2DArray[x][y] instanceof Door) System.out.println("added door");

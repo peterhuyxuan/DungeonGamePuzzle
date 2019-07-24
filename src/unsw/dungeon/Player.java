@@ -3,16 +3,18 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.input.KeyEvent;
+
 /**
  * The player entity
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity implements Moveable, Observable {
+public class Player extends Entity implements Moveable, Observable{
 
     private Dungeon dungeon;
     public ArrayList<Enemy> enemies;
-    public ArrayList<Entity> inventory;
+    public ArrayList<Item> inventory;
     public ArrayList<Sword> swords;
     public ArrayList<Potion> potions;
     public ArrayList<Key> keys;
@@ -27,7 +29,7 @@ public class Player extends Entity implements Moveable, Observable {
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y);
         this.dungeon = dungeon;
-        this.enemies = dungeon.enemyList();
+        this.enemies = new ArrayList<>();
         this.inventory = new ArrayList<>();
         this.swords = new ArrayList<>();
         this.potions = new ArrayList<>();
@@ -215,12 +217,11 @@ public class Player extends Entity implements Moveable, Observable {
 		 	return entities;
     }
     
-    
-    
 
 	@Override
 	public void notifyObservers() {
 		for (Enemy enemy : enemies){
+			//System.out.println("Enemy" + enemy.toString());
 			enemy.update(this.hasPotion());
 		}
 		Potion potion = null;
@@ -233,10 +234,14 @@ public class Player extends Entity implements Moveable, Observable {
 		
 	}
 	
-	public void updateEnemyList(){
-		this.enemies = dungeon.enemyList();		
+	public void addEnemy(Enemy enemy){
+		this.enemies.add(enemy);	
 	}
 
+	public void removeEnemy(Enemy enemy){
+		this.enemies.remove(enemy);	
+	}
+	
 	public ArrayList<Enemy> getEnemies() {
 		return enemies;
 	}
@@ -248,13 +253,7 @@ public class Player extends Entity implements Moveable, Observable {
 	public boolean EnemyDies() {
     	if (this.hasPotion()){
     		return true;
-    	} else if (this.hasSword()) {
-    		this.hitSword();
-    		if (this.getSword().getStrikes() == 0){
-    			this.removeSword();
-    		}
-    		return true;
-    	}
+    	} 
     	return false;
     }
     
@@ -263,36 +262,65 @@ public class Player extends Entity implements Moveable, Observable {
 	//	inventory.add(item);
 	//}
 
-	public ArrayList<Entity> getInventory() {
+	public ArrayList<Item> getInventory() {
 		return inventory;
 	}
 	
 	
 	// sword methods
-	public void pickUpSword(){
-		Sword sword = new Sword(0,0);
-		swords.add(sword);
+	
+	public void pickUpItem(Item item){
+		this.inventory.add(item);
+	}
+	
+
+	
+	public Sword getSword(){
+		for (Item item : inventory){
+			if (item instanceof Sword){
+				return (Sword)item;
+			}
+		}
+		return null;
 	}
 	
 	public boolean hasSword(){
-		return !swords.isEmpty();
+		for (Item item : inventory){
+			if (item instanceof Sword){
+				return true;
+			}
+		}
+		return false;
 	}
 	
-	public void hitSword(){
-		Sword sword = getSword();
-		sword.strike();
-	}
-	
-	public Sword getSword(){
-		return swords.get(0);
-	}
-	
-	public void removeSword(){
-		swords.remove(0);
+	public void useSword(KeyEvent event){
+		if (this.hasSword()){
+			Sword sword = this.getSword();
+			sword.useItem(event, this);
+		}
 	}
 	
 	
 	// potions methods
+	
+	public boolean hasPotion(){
+		for (Item item : inventory){
+			if (item instanceof Potion){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Potion getPotion(){
+		for (Item item : inventory){
+			if (item instanceof Sword){
+				return (Potion)item;
+			}
+		}
+		return null;
+	}
+	/*
 	public void pickUpPotion(){
 		Potion potion = new Potion(0,0);
 		potions.add(potion);
@@ -308,8 +336,7 @@ public class Player extends Entity implements Moveable, Observable {
 	
 	public void removePotion(){
 		potions.remove(0);
-	}
-	
+	} */
 	
 	//key methods
 	public void pickUpKey(Key key){
@@ -327,6 +354,5 @@ public class Player extends Entity implements Moveable, Observable {
 	public void removeKey(Key key){
 		this.keys.remove(key);
 	}
-		
-    
+
 }

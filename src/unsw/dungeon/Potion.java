@@ -1,6 +1,10 @@
 package unsw.dungeon;
 
-public class Potion extends Entity implements Observer{
+import java.util.ArrayList;
+
+import javafx.scene.input.KeyEvent;
+
+public class Potion extends Item implements Observer{
 	
 	public int moves = 20;
 	
@@ -33,4 +37,16 @@ public class Potion extends Entity implements Observer{
 	}
 
 	
+	@Override
+	public void useItem() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void useItem(KeyEvent event, Player P) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
