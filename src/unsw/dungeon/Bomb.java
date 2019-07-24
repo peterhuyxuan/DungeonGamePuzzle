@@ -1,8 +1,10 @@
 package unsw.dungeon;
 
 import java.util.Timer;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.input.KeyEvent;
 
 public class Bomb extends Item {
     private boolean pickedUp;
@@ -50,6 +52,12 @@ public class Bomb extends Item {
 
 	@Override
 	public void useItem() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void useItem(KeyEvent event, Player P) {
 		// TODO Auto-generated method stub
 		
 	}

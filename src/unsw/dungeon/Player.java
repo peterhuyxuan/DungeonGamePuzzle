@@ -221,7 +221,7 @@ public class Player extends Entity implements Moveable, Observable{
 	@Override
 	public void notifyObservers() {
 		for (Enemy enemy : enemies){
-			//System.out.println("Enemy" + enemy.toString());
+			System.out.println("Enemy" + enemy.toString());
 			enemy.update(this.hasPotion());
 		}
 		Potion potion = null;
@@ -314,7 +314,7 @@ public class Player extends Entity implements Moveable, Observable{
 	
 	public Potion getPotion(){
 		for (Item item : inventory){
-			if (item instanceof Sword){
+			if (item instanceof Potion){
 				return (Potion)item;
 			}
 		}
@@ -340,19 +340,37 @@ public class Player extends Entity implements Moveable, Observable{
 	
 	//key methods
 	public void pickUpKey(Key key){
+		System.out.println("Adding key");
 		this.keys.add(key);
 	}
 	
+	
 	public void openDoor(Door door){
-		for (Key key : keys){
-			if (key.getId() == door.getId()) {
-				door.setOpened(true);
+		for (Item item : inventory){
+			if (item instanceof Key){
+				Key key = (Key) item;
+				if (key.getId() == door.getId()) {
+					door.setOpened(true);
+					removeKey(key);
+				}
 			}
 		}
 	}
 	
 	public void removeKey(Key key){
-		this.keys.remove(key);
+		this.inventory.remove(key);
 	}
 
+
+	public Dungeon getDungeon() {
+		return dungeon;
+	}
+
+
+	public void setDungeon(Dungeon dungeon) {
+		this.dungeon = dungeon;
+	}
+
+	
+	
 }

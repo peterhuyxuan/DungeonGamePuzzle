@@ -134,7 +134,7 @@ public abstract class DungeonLoader {
     	   	id = json.getInt("id");
   	    	Key key = new Key(id, x, y);
 	   	    onLoad(key);
-	        entity = key;
+	   	    dungeon.addItem(key);
 	        break;
        case "door":
     	    id = json.getInt("id");

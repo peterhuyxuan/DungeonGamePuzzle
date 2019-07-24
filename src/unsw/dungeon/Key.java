@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
-public class Key extends Entity {
+import javafx.scene.input.KeyEvent;
+
+public class Key extends Item {
 	int id;
 	
     public Key(int id, int x, int y) {
@@ -14,6 +16,18 @@ public class Key extends Entity {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@Override
+	public void useItem() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void useItem(KeyEvent event, Player P) {
+		// TODO Auto-generated method stub
+		
 	}
     
     

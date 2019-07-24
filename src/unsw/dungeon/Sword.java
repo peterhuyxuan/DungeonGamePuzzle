@@ -30,6 +30,7 @@ public class Sword extends Item {
 			for (Enemy E : P.getEnemies()){
 				if (E.getX() == P.getX() && E.getY() == P.getY() - 1){
 					P.removeEnemy(E);
+					P.getDungeon().removeEnemy(E);
 					break;
 				}
 			}
@@ -38,6 +39,7 @@ public class Sword extends Item {
         	for (Enemy E : P.getEnemies()){
 				if (E.getX() == P.getX() - 1 && E.getY() == P.getY() ){
 					P.removeEnemy(E);
+					P.getDungeon().removeEnemy(E);
 					break;
 				}
 			}
@@ -46,6 +48,7 @@ public class Sword extends Item {
         	for (Enemy E : P.getEnemies()){
 				if (E.getX() == P.getX() && E.getY() == P.getY() + 1){
 					P.removeEnemy(E);
+					P.getDungeon().removeEnemy(E);
 					break;
 				}
 			}
@@ -54,6 +57,7 @@ public class Sword extends Item {
         	for (Enemy E : P.getEnemies()){
 				if (E.getX() == P.getX() + 1 && E.getY() == P.getY() - 1){
 					P.removeEnemy(E);
+					P.getDungeon().removeEnemy(E);
 					break;
 				}
 			}
