@@ -314,7 +314,7 @@ public class Player extends Entity implements Moveable, Observable{
 	
 	public Potion getPotion(){
 		for (Item item : inventory){
-			if (item instanceof Sword){
+			if (item instanceof Potion){
 				return (Potion)item;
 			}
 		}
@@ -344,16 +344,21 @@ public class Player extends Entity implements Moveable, Observable{
 		this.keys.add(key);
 	}
 	
+	
 	public void openDoor(Door door){
-		for (Key key : keys){
-			if (key.getId() == door.getId()) {
-				door.setOpened(true);
+		for (Item item : inventory){
+			if (item instanceof Key){
+				Key key = (Key) item;
+				if (key.getId() == door.getId()) {
+					door.setOpened(true);
+					removeKey(key);
+				}
 			}
 		}
 	}
 	
 	public void removeKey(Key key){
-		this.keys.remove(key);
+		this.inventory.remove(key);
 	}
 
 
