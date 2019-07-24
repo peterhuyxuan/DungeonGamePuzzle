@@ -68,9 +68,23 @@ public class DungeonController {
         case RIGHT:
             player.moveRight();
             break;
+        case W:
+        	player.useSword(event);
+            break;
+        case A:
+        	player.useSword(event);
+            break;
+        case S:
+        	player.useSword(event);
+            break;
+        case D:
+        	player.useSword(event);
+            break;
         default:
             break;
         }
+        
+        
         dungeon.update2DArray();
         
         // Concurrency error if set to void???? 
@@ -85,7 +99,7 @@ public class DungeonController {
         	//squares.add(new ImageView(ground), item.getX(), item.getY());
         	//squares.getChildren().add(entity);
         //}   
-        player.updateEnemyList();
+
         dungeon.checkPlayerEnemyCollision();
         //System.out.println("HELLo");
         //System.out.println("WHATTS");

@@ -4,7 +4,7 @@ import java.util.Timer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class Bomb extends Entity {
+public class Bomb extends Item {
     private boolean pickedUp;
     private boolean exploded;
 	
@@ -46,5 +46,11 @@ public class Bomb extends Entity {
 		        }, 
 		        5000 
 		);
+	}
+
+	@Override
+	public void useItem() {
+		// TODO Auto-generated method stub
+		
 	}
 }

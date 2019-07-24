@@ -135,7 +135,6 @@ public abstract class DungeonLoader {
   	    	Key key = new Key(id, x, y);
 	   	    onLoad(key);
 	        entity = key;
-	        dungeon.addItem(entity);
 	        break;
        case "door":
     	    id = json.getInt("id");
@@ -144,39 +143,36 @@ public abstract class DungeonLoader {
 	        entity = door;
 	        break;
        case "enemy":
-    	   System.out.println("Loading enemy");
   	    	Enemy enemy = new Enemy(dungeon, x, y);
 	   	    onLoad(enemy);
-	        entity = enemy;
+	        dungeon.addEnemy(enemy);
 	        break;
        case "potion":
   	    	Potion potion = new Potion(x, y);
 	   	    onLoad(potion);
-	        entity = potion;
-	        dungeon.addItem(entity);
+	        dungeon.addItem(potion);
 	        break;
        case "sword":
   	    	Sword sword = new Sword(x, y);
 	   	    onLoad(sword);	   	
-	        entity = sword;
-	   	    dungeon.addItem(entity);
+	   	    dungeon.addItem(sword);
 	        break;
        case "treasure":
   	    	Treasure treasure = new Treasure(x, y);
 	   	    onLoad(treasure);
 	        entity = treasure;
-	        dungeon.addItem(entity);
 	        break;
        case "bomb":
  	    	Bomb bomb = new Bomb(x, y);
 	   	    onLoad(bomb);
-	        entity = bomb;
-	        dungeon.addItem(entity);
+	        dungeon.addItem(bomb);
 	        break;
         // TODO Handle other possible entities
         }
         // NOTE CHANGE addEntity parameters from addEntity(entity); too...
-        dungeon.addEntity(entity, x , y);
+        if (entity != null){
+        	dungeon.addEntity(entity, x , y);
+        }
     }
     
   

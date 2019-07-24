@@ -15,4 +15,6 @@ public class Treasure extends Entity {
 	public void setPickedUp(boolean pickedUp) {
 		this.pickedUp = pickedUp;
 	}
+
+	
 }
