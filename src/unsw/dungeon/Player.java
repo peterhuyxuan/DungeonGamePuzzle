@@ -31,10 +31,6 @@ public class Player extends Entity implements Moveable, Observable{
         this.dungeon = dungeon;
         this.enemies = new ArrayList<>();
         this.inventory = new ArrayList<>();
-        this.swords = new ArrayList<>();
-        this.potions = new ArrayList<>();
-        this.bombs = new ArrayList<>();
-        this.keys = new ArrayList<>();
         this.Alive = true;
     }
 
@@ -225,10 +221,10 @@ public class Player extends Entity implements Moveable, Observable{
 			enemy.update(this.hasPotion());
 		}
 		Potion potion = null;
-		if (!potions.isEmpty()) {
+		if (this.hasPotion()) {
 			potion = this.getPotion();
 			if (potion.update() == 0) {
-				potions.remove(potion);
+				this.removeItem(potion);
 			}
 		}
 		
@@ -319,6 +315,15 @@ public class Player extends Entity implements Moveable, Observable{
 			}
 		}
 		return null;
+	}
+	
+	public void removeItem(Item item){
+		for (Item I : inventory){
+			if (I.equals(item)){
+				this.inventory.remove(item);
+				break;
+			}
+		}
 	}
 	/*
 	public void pickUpPotion(){
