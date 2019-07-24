@@ -289,6 +289,10 @@ public class Player extends Entity implements Moveable, Observable{
 		if (this.hasSword()){
 			Sword sword = this.getSword();
 			sword.useItem(event, this);
+			if (sword.getStrikes() == 0){
+				System.out.println("removing sword");
+				this.removeItem(sword);
+			}
 		}
 	}
 	
@@ -348,17 +352,13 @@ public class Player extends Entity implements Moveable, Observable{
 				Key key = (Key) item;
 				if (key.getId() == door.getId()) {
 					door.setOpened(true);
-					removeKey(key);
+					this.removeItem(key);
 					break;
 				}
 			}
 		}
 	}
 	
-	public void removeKey(Key key){
-		this.inventory.remove(key);
-	}
-
 
 	public Dungeon getDungeon() {
 		return dungeon;
