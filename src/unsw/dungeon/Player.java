@@ -15,10 +15,6 @@ public class Player extends Entity implements Moveable, Observable{
     private Dungeon dungeon;
     public ArrayList<Enemy> enemies;
     public ArrayList<Item> inventory;
-    public ArrayList<Sword> swords;
-    public ArrayList<Potion> potions;
-    public ArrayList<Key> keys;
-    public ArrayList<Bomb> bombs;
     boolean Alive;
 
     /**
@@ -343,11 +339,7 @@ public class Player extends Entity implements Moveable, Observable{
 		potions.remove(0);
 	} */
 	
-	//key methods
-	public void pickUpKey(Key key){
-		System.out.println("Adding key");
-		this.keys.add(key);
-	}
+
 	
 	
 	public void openDoor(Door door){
