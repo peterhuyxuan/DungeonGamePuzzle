@@ -28,6 +28,7 @@ public class Dungeon {
     private Player player;
     private GoalComponentsComplete goal;
     private List<SwitchTrigger> switchTriggers;
+    private List<Treasure> treasures;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -39,6 +40,7 @@ public class Dungeon {
         this.items = new ArrayList<>();
         this.goal = null;
         this.switchTriggers = new ArrayList<>();
+        this.treasures = new ArrayList<>();
 
     }
 
@@ -64,6 +66,13 @@ public class Dungeon {
     }
     
 
+    public void checkDungeonInteractions(){
+    	this.itemPickUp();
+    	this.treasurePickUp();
+    	this.checkPlayerEnemyCollision();
+    	this.update2DArray();
+    }
+    
     public void checkPlayerEnemyCollision(){
     	for (Enemy enemy : enemies){
     		if (enemy.getX() == player.getX() && enemy.getY() == player.getY()){
@@ -81,21 +90,32 @@ public class Dungeon {
     public void itemPickUp(){
     	for (Item item : items){
     		if (player.getX() == item.getX() && player.getY() == item.getY()){
-    			
-    			//if (item instanceof Sword) {
-    			//	player.pickUpSword();
-    			//} else if (item instanceof Potion) {
-    			//	player.pickUpPotion();
-    			//} else if (item instanceof Key) {
-    				//player.pickUpKey((Key)item);
-    			//}
-    			// TODO Add more items
     			player.pickUpItem(item);
     			removeItem(item);
     			break;
     		}
     	}
 
+    }
+    
+    public void treasurePickUp(){
+    	
+    	for (Treasure treasure : treasures) {
+    			if (player.getX() == treasure.getX() && player.getY() == treasure.getY()){
+    			System.out.println("picking up treasure");
+    			removeTreasure(treasure);
+    			break;
+    		}
+    	}	
+    }
+    
+    public void addTreasure(Treasure treasure){
+    	System.out.println("adding treasure");
+    	treasures.add(treasure);
+    }
+    
+    public void removeTreasure(Treasure treasure){
+    	treasures.remove(treasure);
     }
     
     public void removeEntity(Entity entity){

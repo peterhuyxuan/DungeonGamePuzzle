@@ -85,10 +85,10 @@ public class DungeonController {
         }
         
         
-        dungeon.update2DArray();
+        dungeon.checkDungeonInteractions();
         
         // Concurrency error if set to void???? 
-        dungeon.itemPickUp();
+        
         
         //if (!(item == null)){
         	//System.out.println("Removing Item");
@@ -100,7 +100,6 @@ public class DungeonController {
         	//squares.getChildren().add(entity);
         //}   
 
-        dungeon.checkPlayerEnemyCollision();
         //System.out.println("HELLo");
         //System.out.println("WHATTS");
     }

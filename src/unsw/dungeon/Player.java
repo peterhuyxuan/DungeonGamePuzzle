@@ -198,22 +198,11 @@ public class Player extends Entity implements Moveable, Observable{
 		return  this.dungeon.getTile(getX() + 1, getY());  	
     }
     
-    public ArrayList<Entity> getPlayerTile(){
-    		ArrayList<Entity> entities = new ArrayList<>();
-		 	List<Entity> dungeonEntities = dungeon.getEntities();
-		 	for (Entity e : dungeonEntities){
-		 		if (e.getX() == getX() && e.getY() == getY()){
-		 			entities.add(e);
-		 		}
-		 	}
-		 	return entities;
-    }
-    
 
 	@Override
 	public void notifyObservers() {
 		for (Enemy enemy : enemies){
-			System.out.println("Enemy" + enemy.toString());
+			//System.out.println("Enemy" + enemy.toString());
 			enemy.update(this.hasPotion());
 		}
 		Potion potion = null;
@@ -290,7 +279,7 @@ public class Player extends Entity implements Moveable, Observable{
 			Sword sword = this.getSword();
 			sword.useItem(event, this);
 			if (sword.getStrikes() == 0){
-				System.out.println("removing sword");
+				//System.out.println("removing sword");
 				this.removeItem(sword);
 			}
 		}
@@ -325,26 +314,7 @@ public class Player extends Entity implements Moveable, Observable{
 			}
 		}
 	}
-	/*
-	public void pickUpPotion(){
-		Potion potion = new Potion(0,0);
-		potions.add(potion);
-	}
-	
-	public boolean hasPotion(){
-		return !potions.isEmpty();
-	}
-	
-	public Potion getPotion(){
-		return potions.get(0);
-	}
-	
-	public void removePotion(){
-		potions.remove(0);
-	} */
-	
 
-	
 	
 	public void openDoor(Door door){
 		for (Item item : inventory){

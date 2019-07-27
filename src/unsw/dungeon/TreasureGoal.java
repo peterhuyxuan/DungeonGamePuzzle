@@ -10,6 +10,7 @@ public class TreasureGoal implements GoalCondition {
 //			currentGoalCondition = true;
 //		return currentGoalCondition;
 		
+		/*
 		if (D.getTile(D.getPlayerX(), D.getPlayerY()) instanceof Treasure) {
 			Treasure exactSpot = (Treasure) D.getTile(D.getPlayerX(), D.getPlayerY());
 			exactSpot.setPickedUp(true);
@@ -23,6 +24,11 @@ public class TreasureGoal implements GoalCondition {
 //					System.out.println();
 					return false;
 				}
+			}
+		}*/
+		for (Entity entity : D.getEntities()) {
+			if (entity instanceof Treasure) {
+				return false;
 			}
 		}
 		return true;

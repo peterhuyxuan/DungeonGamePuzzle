@@ -160,7 +160,7 @@ public abstract class DungeonLoader {
        case "treasure":
   	    	Treasure treasure = new Treasure(x, y);
 	   	    onLoad(treasure);
-	        entity = treasure;
+	        dungeon.addTreasure(treasure);
 	        break;
        case "bomb":
  	    	Bomb bomb = new Bomb(x, y);

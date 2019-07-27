@@ -14,7 +14,7 @@ public class Potion extends Item implements Observer{
     
     public int degrade(){
     	setMoves(getMoves() -1);
-    	System.out.println("PLayer sips potion now has charrges: " + this.getMoves());
+    	//System.out.println("PLayer sips potion now has charrges: " + this.getMoves());
     	return this.getMoves();
     }
 
