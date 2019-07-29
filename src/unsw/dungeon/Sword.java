@@ -29,8 +29,10 @@ public class Sword extends Item {
 		case W:
 			for (Enemy E : P.getEnemies()){
 				if (E.getX() == P.getX() && E.getY() == P.getY() - 1){
+					E.setVisible(false);
 					P.removeEnemy(E);
 					P.getDungeon().removeEnemy(E);
+					P.getDungeon().removeEntity(E);
 					break;
 				}
 			}
@@ -38,8 +40,11 @@ public class Sword extends Item {
         case A:
         	for (Enemy E : P.getEnemies()){
 				if (E.getX() == P.getX() - 1 && E.getY() == P.getY() ){
+					E.setVisible(false);
 					P.removeEnemy(E);
 					P.getDungeon().removeEnemy(E);
+					P.getDungeon().removeEntity(E);
+
 					break;
 				}
 			}
@@ -47,17 +52,23 @@ public class Sword extends Item {
         case S:
         	for (Enemy E : P.getEnemies()){
 				if (E.getX() == P.getX() && E.getY() == P.getY() + 1){
+					E.setVisible(false);
 					P.removeEnemy(E);
 					P.getDungeon().removeEnemy(E);
+					P.getDungeon().removeEntity(E);
+
 					break;
 				}
 			}
             break;
         case D:
         	for (Enemy E : P.getEnemies()){
-				if (E.getX() == P.getX() + 1 && E.getY() == P.getY() - 1){
+				if (E.getX() == P.getX() + 1 && E.getY() == P.getY()){
+					E.setVisible(false);
 					P.removeEnemy(E);
 					P.getDungeon().removeEnemy(E);
+					P.getDungeon().removeEntity(E);
+
 					break;
 				}
 			}

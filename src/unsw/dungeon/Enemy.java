@@ -1,12 +1,11 @@
 package unsw.dungeon;
 
-public class Enemy extends Entity implements Observer {
+public class Enemy extends Moveable implements Observer {
 	
-	Dungeon dungeon;
 	EnemyMove moveState;
 	
     public Enemy(Dungeon dungeon, int x, int y) {
-        super(x, y);   
+        super(x, y, dungeon);   
         this.dungeon = dungeon;
         this.moveState = new AttackMove();
     }
@@ -27,25 +26,25 @@ public class Enemy extends Entity implements Observer {
 		boolean moved = false;
 		if (Math.abs(xDiff) > Math.abs(yDiff)){
 			if (xDiff < 0 && this.canMoveLeft()){
-				x().set(getX() - moveState.moveDirection(1));
+				this.moveLeft();
 				moved = true;
 			} else if (xDiff > 0 && this.canMoveRight()) {
-				x().set(getX() + moveState.moveDirection(1));
+				this.moveRight();
 				moved = true;
 			}
 		}
 		if (yDiff < 0 && this.canMoveUp() && moved == false){
-			 y().set(getY() - moveState.moveDirection(1));
+			 this.moveUp();
 			 moved = true;
 		} else if (yDiff > 0 && this.canMoveDown() && moved == false) {
-			 y().set(getY() + moveState.moveDirection(1));
+			 this.moveDown();
 			 moved = true;
 		}
 		if (xDiff < 0 && this.canMoveLeft() && moved == false){
-			x().set(getX() - moveState.moveDirection(1));
+			this.moveLeft();
 			moved = true;
 		} else if (xDiff > 0 && this.canMoveRight() && moved == false) {
-			x().set(getX() + moveState.moveDirection(1));
+			this.moveRight();
 			moved = true;
 		}
 		
@@ -63,48 +62,53 @@ public class Enemy extends Entity implements Observer {
 		return playerY - this.getY();
 	}
 	
-    public Entity getAboveTile(){
+    @Override
+    public Moveable getAboveTile(){
 		return  this.dungeon.getTile(getX(), getY() - moveState.moveDirection(1));  	
     }
-    
-    public Entity getBelowTile(){
+    @Override
+    public Moveable getBelowTile(){
 		return  this.dungeon.getTile(getX(), getY() + moveState.moveDirection(1));  	
     }
-    
-    public Entity getLeftTile(){
+    @Override
+    public Moveable getLeftTile(){
 		return  this.dungeon.getTile(getX() - moveState.moveDirection(1), getY());  	
     }
-    
-    public Entity getRightTile(){
+    @Override
+    public Moveable getRightTile(){
 		return  this.dungeon.getTile(getX() + moveState.moveDirection(1), getY());  	
     }
 
+    @Override
     public boolean canMoveUp(){
-    	if (getAboveTile() instanceof Wall || getAboveTile() instanceof Boulder){
+    	if (getAboveTile() != null){
     		return false;
     	} else {
     		return true;
     	}
     }
     
+    @Override
     public boolean canMoveDown(){
-    	if (getBelowTile() instanceof Wall || getBelowTile() instanceof Boulder){
+    	if (getBelowTile() != null){
     		return false;
     	} else {
     		return true;
     	}
     }
     
+    @Override
     public boolean canMoveRight(){
-    	if (getRightTile() instanceof Wall || getRightTile() instanceof Boulder){
+    	if (getRightTile() != null){
     		return false;
     	} else {
     		return true;
     	}
     }
     
+    @Override
     public boolean canMoveLeft(){
-    	if (getLeftTile() instanceof Wall || getLeftTile() instanceof Boulder){
+    	if (getLeftTile() != null){
     		return false;
     	} else {
     		return true;
@@ -127,5 +131,26 @@ public class Enemy extends Entity implements Observer {
 	@Override
 	public int update() {
 		return 0;
+	}
+
+	@Override
+	public void moveUp() {
+		 y().set(getY() - moveState.moveDirection(1));	
+	}
+
+	@Override
+	public void moveDown() {
+		 y().set(getY() + moveState.moveDirection(1));		
+	}
+
+	@Override
+	public void moveLeft() {
+		x().set(getX() - moveState.moveDirection(1));		
+	}
+
+	@Override
+	public void moveRight() {
+		x().set(getX() + moveState.moveDirection(1));
+		
 	}
 }

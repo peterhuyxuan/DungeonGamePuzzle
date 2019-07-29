@@ -103,6 +103,7 @@ public abstract class DungeonLoader {
 
         int id = 0;
         Entity entity = null;
+        Moveable moveable = null;
         switch (type) {
         case "player":
             Player player = new Player(dungeon, x, y);
@@ -111,8 +112,10 @@ public abstract class DungeonLoader {
             entity = player;
             break;
         case "wall":
-            Wall wall = new Wall(x, y);
+            Wall wall = new Wall(x, y, null);
             onLoad(wall);
+            moveable = wall;
+	        dungeon.setTile(moveable, x, y);
             entity = wall;
             break;
        case "exit":
@@ -128,51 +131,62 @@ public abstract class DungeonLoader {
        case "boulder":
    	    	Boulder boulder = new Boulder(dungeon, x, y);
 	   	    onLoad(boulder);
-	        entity = boulder;
+	        moveable = boulder;
+	        dungeon.setTile(moveable, x, y);
+            entity = boulder;
 	        break;
        case "key":
     	   	id = json.getInt("id");
   	    	Key key = new Key(id, x, y);
 	   	    onLoad(key);
 	   	    dungeon.addItem(key);
+            entity = key;
 	        break;
        case "door":
     	    id = json.getInt("id");
-  	    	Door door = new Door(id, x, y);
+  	    	Door door = new Door(id, x, y, dungeon);
 	   	    onLoad(door);
-	        entity = door;
+	        moveable = door;
+	        dungeon.setTile(moveable, x, y);
+            entity = door;
 	        break;
        case "enemy":
   	    	Enemy enemy = new Enemy(dungeon, x, y);
 	   	    onLoad(enemy);
 	        dungeon.addEnemy(enemy);
+            entity = enemy;
 	        break;
        case "potion":
   	    	Potion potion = new Potion(x, y);
 	   	    onLoad(potion);
 	        dungeon.addItem(potion);
+            entity = potion;
 	        break;
        case "sword":
   	    	Sword sword = new Sword(x, y);
 	   	    onLoad(sword);	   	
 	   	    dungeon.addItem(sword);
+            entity = sword;
 	        break;
        case "treasure":
   	    	Treasure treasure = new Treasure(x, y);
 	   	    onLoad(treasure);
 	        dungeon.addTreasure(treasure);
+            entity = treasure;
 	        break;
        case "bomb":
  	    	Bomb bomb = new Bomb(x, y);
 	   	    onLoad(bomb);
 	        dungeon.addItem(bomb);
+            entity = bomb;
 	        break;
         // TODO Handle other possible entities
         }
         // NOTE CHANGE addEntity parameters from addEntity(entity); too...
-        if (entity != null){
-        	dungeon.addEntity(entity, x , y);
-        }
+        // only used for keyswitches and player
+        
+        	dungeon.addEntity(entity);
+        
     }
     
   

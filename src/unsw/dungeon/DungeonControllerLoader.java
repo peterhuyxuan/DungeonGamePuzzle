@@ -129,6 +129,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
+        trackVisible(entity, view);     
         entities.add(view);
     }
 
@@ -161,6 +162,16 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
 
+    private void trackVisible(Entity entity, final Node node) {
+        entity.getVisible().addListener(new ChangeListener<Boolean>() {
+        	@Override
+            public void changed(ObservableValue<? extends Boolean> observable,
+                    Boolean oldValue, Boolean newValue) {
+                     node.setVisible(newValue.booleanValue());
+            }
+        });
+    }
+    
     /**
      * Create a controller that can be attached to the DungeonView with all the
      * loaded entities.

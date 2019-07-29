@@ -10,9 +10,8 @@ import javafx.scene.input.KeyEvent;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity implements Moveable, Observable{
+public class Player extends Moveable implements Observable{
 
-    private Dungeon dungeon;
     public ArrayList<Enemy> enemies;
     public ArrayList<Item> inventory;
     boolean Alive;
@@ -23,8 +22,7 @@ public class Player extends Entity implements Moveable, Observable{
      * @param y
      */
     public Player(Dungeon dungeon, int x, int y) {
-        super(x, y);
-        this.dungeon = dungeon;
+        super(x, y, dungeon);
         this.enemies = new ArrayList<>();
         this.inventory = new ArrayList<>();
         this.Alive = true;
@@ -43,97 +41,64 @@ public class Player extends Entity implements Moveable, Observable{
 
 	@Override
     public void moveUp() {
-    	Entity aboveEntity = getAboveTile();
-    	if (aboveEntity instanceof Wall){
-        	return; 
-    	} else if (aboveEntity instanceof Boulder) {
-    		Boulder boulder = (Boulder)aboveEntity;
-    		
-    		if (boulder.canMoveUp()){
-    			boulder.moveUp();
-    			this.movePlayerUp();
-    			return;
-    		} else {
-    			return;
-    		}
-    	} else if (aboveEntity instanceof Door) { 
-    		Door door = (Door)aboveEntity;  
-    		this.openDoor(door);
-    		if (door.isOpened()){
-    			this.movePlayerUp();
-    			return;
-    		} else {
-    			return;
-    		}  
-    		
-        } else {
-        	this.movePlayerUp();
-        }
+    	Moveable entity = getAboveTile();
+    	
+    	if (entity == null){
+    		this.movePlayerUp();
+    	} else if (entity.canMoveUp() == true){
+    		entity.moveUp();
+    		dungeon.update2DArray();
+    		this.movePlayerUp();
+    	} else {
+    		return;
+    	}
     }
 
     @Override
     public void moveDown() {
     	
-    	Entity belowEntity = getBelowTile();
-
-    	if (belowEntity instanceof Wall) {
-    		return;    		
-    	} else if (belowEntity instanceof Boulder) {
-    		Boulder boulder = (Boulder)belowEntity;   		
-    		if (boulder.canMoveDown()){
-    			boulder.moveDown();
-        		this.movePlayerDown();
-    			return;
-    		} else {
-    			return;
-    		} 
-    	} else if (belowEntity instanceof Door) { 
-    		Door door = (Door)belowEntity; 
-    		this.openDoor(door);
-    		if (door.isOpened()){
-    			this.movePlayerDown();
-    			return;
-    		} else {
-    			return;
-    		}  
-    	} else {
+    	Moveable entity = getBelowTile();
+    	if (entity == null){
     		this.movePlayerDown();
+    	} else if (entity.canMoveDown() == true){
+    		entity.moveDown();
+    		dungeon.update2DArray();
+    		this.movePlayerDown();
+    	} else {
+    		return;
     	}
     }
 
     @Override
     public void moveLeft() {
 
-    	Entity leftEntity = getLeftTile();
-
-    	if (leftEntity instanceof Wall) {
-    		return;   		
-    	} else if (leftEntity instanceof Boulder) {
-    		Boulder boulder = (Boulder)leftEntity;   		
-    		if (boulder.canMoveLeft()){
-    			boulder.moveLeft();
-    			this.movePlayerLeft();
-    			return;
-    		} else {
-    			return;
-    		}
-    	} else if (leftEntity instanceof Door) { 
-    		Door door = (Door)leftEntity;  
-    		this.openDoor(door);
-    		if (door.isOpened()){
-    			this.movePlayerLeft();
-    			return;
-    		} else {
-    			return;
-    		}  
-    	} else {
+    	Moveable entity = getLeftTile();
+    	if (entity == null){
     		this.movePlayerLeft();
+    	} else if (entity.canMoveLeft() == true){
+    		entity.moveLeft();
+    		dungeon.update2DArray();
+    		this.movePlayerLeft();
+    	} else {
+    		return;
     	}
     }
 
     @Override
     public void moveRight() {
+    	
+    	Moveable entity = getRightTile();
+    	if (entity == null){
+    		this.movePlayerRight();
+    	} else if (entity.canMoveRight() == true){
+    		entity.moveRight();
+    		dungeon.update2DArray();
+    		this.movePlayerRight();
+    	} else {
+    		return;
+    	}
 
+    	/*
     	Entity rightEntity = getRightTile();
 
     	if (rightEntity instanceof Wall) {
@@ -142,6 +107,7 @@ public class Player extends Entity implements Moveable, Observable{
     		Boulder boulder = (Boulder)rightEntity;   		
     		if (boulder.canMoveRight()){
     			boulder.moveRight();
+    			dungeon.update2DArray();
     			this.movePlayerRight();
     			return;
     		} else {
@@ -158,7 +124,7 @@ public class Player extends Entity implements Moveable, Observable{
     		}  
     	}  else {
             this.movePlayerRight();
-    	}
+    	}*/
     }
     
     public void movePlayerUp(){
@@ -182,19 +148,19 @@ public class Player extends Entity implements Moveable, Observable{
     }
     
     @Override
-    public Entity getAboveTile(){
+    public Moveable getAboveTile(){
 		return  this.dungeon.getTile(getX(), getY() - 1);  	
     }
     @Override
-    public Entity getBelowTile(){
+    public Moveable getBelowTile(){
 		return  this.dungeon.getTile(getX(), getY() + 1);  	
     }
     @Override
-    public Entity getLeftTile(){
+    public Moveable getLeftTile(){
 		return  this.dungeon.getTile(getX() - 1, getY());  	
     }
     @Override
-    public Entity getRightTile(){
+    public Moveable getRightTile(){
 		return  this.dungeon.getTile(getX() + 1, getY());  	
     }
     
@@ -315,7 +281,7 @@ public class Player extends Entity implements Moveable, Observable{
 		}
 	}
 
-	
+	/*
 	public void openDoor(Door door){
 		for (Item item : inventory){
 			if (item instanceof Key){
@@ -327,7 +293,7 @@ public class Player extends Entity implements Moveable, Observable{
 				}
 			}
 		}
-	}
+	}*/
 	
 
 	public Dungeon getDungeon() {
@@ -338,6 +304,36 @@ public class Player extends Entity implements Moveable, Observable{
 	public void setDungeon(Dungeon dungeon) {
 		this.dungeon = dungeon;
 	}
+
+
+	@Override
+	public boolean canMoveUp() {
+		// Not used
+		return false;
+	}
+
+
+	@Override
+	public boolean canMoveDown() {
+		// Not use
+		return false;
+	}
+
+
+	@Override
+	public boolean canMoveLeft() {
+		// Not use
+		return false;
+	}
+
+
+	@Override
+	public boolean canMoveRight() {
+		// Not use
+		return false;
+	}
+
+
 
 	
 	

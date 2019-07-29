@@ -46,6 +46,18 @@ public class DungeonController {
             squares.getChildren().add(entity);
 
     }
+    
+    @FXML
+    public void initializeDirt() {
+        Image ground = new Image("/dirt_0_new.png");
+
+        // Add the ground first so it is below all other entities
+        for (int x = 0; x < dungeon.getWidth(); x++) {
+            for (int y = 0; y < dungeon.getHeight(); y++) {
+                squares.add(new ImageView(ground), x, y);
+            }
+        }
+    }
 
     // This game is pseudo turn based
     @FXML
@@ -84,11 +96,12 @@ public class DungeonController {
             break;
         }
         
+        squares.getChildren().remove(initialEntities.get(3));
         
         dungeon.checkDungeonInteractions();
         
         // Concurrency error if set to void???? 
-        
+       
         
         //if (!(item == null)){
         	//System.out.println("Removing Item");

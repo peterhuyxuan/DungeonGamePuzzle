@@ -9,6 +9,10 @@ import java.util.List;
 //import javafx.beans.property.SimpleIntegerProperty;
 
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -22,9 +26,10 @@ public class Dungeon {
 
     private int width, height;
     private List<Entity> entities;
+    private ArrayList<Entity> removedEntities;
     private ArrayList<Item> items;
     private ArrayList<Enemy> enemies;
-    private Entity[][] WallBoulderDoor2DArray;
+    private Moveable[][] WallBoulderDoor2DArray;
     private Player player;
     private GoalComponentsComplete goal;
     private List<SwitchTrigger> switchTriggers;
@@ -34,8 +39,9 @@ public class Dungeon {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<>();
+        this.removedEntities = new ArrayList<>();
         this.enemies = new ArrayList<>();
-        this.WallBoulderDoor2DArray = new Entity[width][height];
+        this.WallBoulderDoor2DArray = new Moveable[width][height];
         this.player = null;
         this.items = new ArrayList<>();
         this.goal = null;
@@ -59,11 +65,6 @@ public class Dungeon {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
-    public void addEntity(Entity entity, int x, int y) {
-        entities.add(entity);
-        setTile(entity, x, y);
-    }
     
 
     public void checkDungeonInteractions(){
@@ -77,6 +78,8 @@ public class Dungeon {
     	for (Enemy enemy : enemies){
     		if (enemy.getX() == player.getX() && enemy.getY() == player.getY()){
     			if (player.EnemyDies()){
+    				System.out.println("Enemy dies");
+
     				removeEntity(enemy);
     				player.removeEnemy(enemy);
     			} else {
@@ -118,11 +121,26 @@ public class Dungeon {
     	treasures.remove(treasure);
     }
     
-    public void removeEntity(Entity entity){
-    	entities.remove(entity);
+
+    public void addEntity(Entity entity) {
+        entities.add(entity);
     }
     
-    public void addItem(Item item){
+    public void removeEntity(Entity entity){
+    	entities.remove(entity);
+    	removedEntities.add(entity);
+    }
+    
+    
+    public ArrayList<Entity> getRemovedEntities() {
+		return removedEntities;
+	}
+
+	public void setRemovedEntities(ArrayList<Entity> removedEntities) {
+		this.removedEntities = removedEntities;
+	}
+
+	public void addItem(Item item){
     	items.add(item);
     }
     
@@ -130,9 +148,7 @@ public class Dungeon {
     	items.remove(item);
     }
     
-    public Entity getTile(int x, int y){
-		return  WallBoulderDoor2DArray[x][y];  	
-    }
+    
     
     public void addEnemy(Enemy enemy){
     	this.enemies.add(enemy);
@@ -141,6 +157,8 @@ public class Dungeon {
     
     public void removeEnemy(Enemy enemy){
     	this.enemies.remove(enemy);
+    	this.entities.remove(enemy);
+    	this.player.removeEnemy(enemy);
     }
     
     public ArrayList<Enemy> getEnemies() {
@@ -151,18 +169,21 @@ public class Dungeon {
 		this.enemies = enemies;
 	}
 
-	public void setTile(Entity e, int x, int y){
+	public void setTile(Moveable e, int x, int y){
     	//if (e instanceof Door) System.out.println("Adding door to array at" + x + y);
-    	if (e instanceof Wall || e instanceof Boulder || e instanceof Door || e instanceof Treasure) WallBoulderDoor2DArray[x][y] = e;
+    	WallBoulderDoor2DArray[x][y] = e;
     	//if (WallBoulderDoor2DArray[x][y] instanceof Door) System.out.println("added door");
     }
-   
+	
+	public Moveable getTile(int x, int y){
+		return  WallBoulderDoor2DArray[x][y];  	
+    }
     
     public Entity[][] getWallBoulder2DArray() {
 		return WallBoulderDoor2DArray;
 	}
 
-	public void setWallBoulder2DArray(Entity[][] wallBoulder2DArray) {
+	public void setWallBoulder2DArray(Moveable[][] wallBoulder2DArray) {
 		this.WallBoulderDoor2DArray = wallBoulder2DArray;
 	}
 
@@ -179,9 +200,17 @@ public class Dungeon {
     }*/
     
     public void update2DArray(){
-    	setWallBoulder2DArray(new Entity[width][height]);
-    	for (Entity entity : entities){
-    		 setTile(entity, entity.getX(), entity.getY()); 
+    	for (int x = 0; x < this.getWidth(); x++){
+    		for (int y = 0; y < this.getHeight(); y++){
+        		Moveable entity = this.getTile(x, y);
+        		if (entity != null) {
+	        		if (entity.getX() != x || entity.getY() != y){
+	        			
+	        			this.setTile(entity, entity.getX(), entity.getY());
+	        			this.setTile(null, x, y);
+	        		}
+        		}
+        	}
     	}
     }
     
