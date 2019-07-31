@@ -106,6 +106,11 @@ public class DungeonController {
         case D:
         	player.useSword(event);
             break;
+        case E:
+        	
+        	player.usePotion();
+        	
+            break;
         default:
             break;
         }

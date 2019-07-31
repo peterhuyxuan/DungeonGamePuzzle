@@ -3,6 +3,10 @@ package unsw.dungeon;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.Node;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -154,6 +158,7 @@ public abstract class DungeonLoader {
   	    	Enemy enemy = new Enemy(dungeon, x, y);
 	   	    onLoad(enemy);
 	        dungeon.addEnemy(enemy);
+	        this.trackPlayerInvi(enemy, dungeon.getPlayer());
             entity = enemy;
 	        break;
        case "potion":
@@ -188,7 +193,16 @@ public abstract class DungeonLoader {
         	dungeon.addEntity(entity);
         
     }
-    
+
+    private void trackPlayerInvi(final Enemy enemy, Player player) {
+        player.getInvi().addListener(new ChangeListener<Boolean>() {
+        	@Override
+            public void changed(ObservableValue<? extends Boolean> observable,
+                    Boolean oldValue, Boolean newValue) {
+                    enemy.update(newValue.booleanValue());
+            }
+        });
+    }
   
     public JSONObject getJson() {
 		return json;

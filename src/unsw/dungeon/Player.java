@@ -3,6 +3,8 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.input.KeyEvent;
 
 /**
@@ -14,6 +16,7 @@ public class Player extends Moveable implements Observable, Observer {
 
     public ArrayList<Enemy> enemies;
     public ArrayList<Item> inventory;
+    BooleanProperty Invi;
     boolean Alive;
 
     /**
@@ -26,10 +29,21 @@ public class Player extends Moveable implements Observable, Observer {
         this.enemies = new ArrayList<>();
         this.inventory = new ArrayList<>();
         this.Alive = true;
+        this.Invi = new SimpleBooleanProperty(false); 
     }
 
     
-    public boolean isAlive() {
+    public BooleanProperty getInvi() {
+		return Invi;
+	}
+
+
+	public void setInvi(boolean b) {
+		this.getInvi().set(b);
+	}
+
+
+	public boolean isAlive() {
 		return Alive;
 	}
 
@@ -167,18 +181,6 @@ public class Player extends Moveable implements Observable, Observer {
 
 	@Override
 	public void notifyObservers() {
-		for (Enemy enemy : enemies){
-			//System.out.println("Enemy" + enemy.toString());
-			enemy.update(this.hasPotion());
-		}
-		Potion potion = null;
-		if (this.hasPotion()) {
-			potion = this.getPotion();
-			potion.update();
-			if (potion.getMoves() == 0) {
-				this.removeItem(potion);
-			}
-		}
 		
 	}
 	
@@ -186,20 +188,12 @@ public class Player extends Moveable implements Observable, Observer {
 		this.enemies.add(enemy);	
 	}
 
-	public void removeEnemy(Enemy enemy){
-		this.enemies.remove(enemy);	
-	}
-	
-
 	public void setEnemies(ArrayList<Enemy> enemies) {
 		this.enemies = enemies;
 	}
 	
 	public boolean EnemyDies() {
-    	if (this.hasPotion()){
-    		return true;
-    	} 
-    	return false;
+    	return this.getInvi().get();
     }
     
     
@@ -241,7 +235,7 @@ public class Player extends Moveable implements Observable, Observer {
 	public void useSword(KeyEvent event){
 		if (this.hasSword()){
 			Sword sword = this.getSword();
-			sword.useItem(event, this);
+			sword.useItem(event, this.getDungeon());
 			if (sword.getStrikes() == 0){
 				this.removeItem(sword);
 			}
@@ -260,6 +254,15 @@ public class Player extends Moveable implements Observable, Observer {
 		return false;
 	}
 	
+	public void usePotion(){
+		if (this.hasPotion()) {
+			Potion p = this.getPotion();
+			p.useItem(this);
+			this.removeItem(p);
+		}
+	}
+	
+	
 	public Potion getPotion(){
 		for (Item item : inventory){
 			if (item instanceof Potion){
@@ -277,21 +280,6 @@ public class Player extends Moveable implements Observable, Observer {
 			}
 		}
 	}
-
-	/*
-	public void openDoor(Door door){
-		for (Item item : inventory){
-			if (item instanceof Key){
-				Key key = (Key) item;
-				if (key.getId() == door.getId()) {
-					door.setOpened(true);
-					this.removeItem(key);
-					break;
-				}
-			}
-		}
-	}*/
-	
 
 	public Dungeon getDungeon() {
 		return dungeon;

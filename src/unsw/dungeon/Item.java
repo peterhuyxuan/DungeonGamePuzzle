@@ -10,5 +10,9 @@ public abstract class Item extends Entity {
 	}
 	
 	public abstract void useItem();
-	public abstract void useItem(KeyEvent event, Player P);
+	public abstract void useItem(KeyEvent event, Dungeon D);
+
+	public abstract void useItem(Dungeon D);
+
+	public abstract void useItem(Player P);
 }

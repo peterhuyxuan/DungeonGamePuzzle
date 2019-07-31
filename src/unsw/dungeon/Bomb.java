@@ -57,8 +57,22 @@ public class Bomb extends Item {
 	}
 
 	@Override
-	public void useItem(KeyEvent event, Player P) {
+	public void useItem(KeyEvent event, Dungeon D) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void useItem(Dungeon D) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void useItem(Player P) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

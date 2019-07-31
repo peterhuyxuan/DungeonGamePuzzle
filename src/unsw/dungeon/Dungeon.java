@@ -159,7 +159,6 @@ public class Dungeon {
     public void removeEnemy(Enemy enemy){
     	this.enemies.remove(enemy);
     	this.entities.remove(enemy);
-    	this.player.removeEnemy(enemy);
     }
     
     public ArrayList<Enemy> getEnemies() {

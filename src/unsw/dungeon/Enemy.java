@@ -32,7 +32,7 @@ public class Enemy extends Moveable implements Observer {
 		int yDiff = yDiff();
 		boolean moved = false;
 		int randomInt = random.nextInt(2);
-		System.out.println(randomInt);
+		//System.out.println(randomInt);
 		
 		
 		if (Math.abs(yDiff) == 0){

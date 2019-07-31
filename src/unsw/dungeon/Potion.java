@@ -1,42 +1,48 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import org.junit.rules.Timeout;
 
 import javafx.scene.input.KeyEvent;
 
-public class Potion extends Item implements Observer{
-	
+public class Potion extends Item {
 	
 	
     public Potion(int x, int y) {
         super(x, y);   
     }
-    
-    public int degrade(){
-    	setMoves(getMoves() -1);
-    	//System.out.println("PLayer sips potion now has charrges: " + this.getMoves());
-    	return this.getMoves();
-    }
 
-	public int getMoves() {
-		return moves;
-	}
-
-	public void setMoves(int moves) {
-		this.moves = moves;
+	@Override
+	public void useItem(Player P) {
+		P.setInvi(true);
+		System.out.println("player invicible");
+		Timer t = new Timer();
+		t.schedule(new PlayerInviFalse(P), 5000);
 	}
 
 	@Override
-	public void update() {
-		this.degrade();
-	}
-
-	@Override
-	public void update(boolean hasPotion) {
+	public void useItem(KeyEvent event, Dungeon D) {
+		// TODO Auto-generated method stub
 		
 	}
-
 	
+	 class PlayerInviFalse extends TimerTask {
+		 	Player P;
+		 	
+		 	public PlayerInviFalse(Player p){
+		 		this.P = p;
+		 	}
+		 
+		 	@Override
+	        public void run() {
+	            P.setInvi(false);
+	        }
+
+	    }
+
 	@Override
 	public void useItem() {
 		// TODO Auto-generated method stub
@@ -44,9 +50,11 @@ public class Potion extends Item implements Observer{
 	}
 
 	@Override
-	public void useItem(KeyEvent event, Player P) {
+	public void useItem(Dungeon D) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }

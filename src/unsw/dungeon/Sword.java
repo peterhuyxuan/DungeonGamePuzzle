@@ -22,51 +22,43 @@ public class Sword extends Item {
 	}
 
 	@Override
-	public void useItem(KeyEvent event, Player P) {
+	public void useItem(KeyEvent event, Dungeon D) {
 		setStrikes(getStrikes() -1);
+		ArrayList<Enemy> enemies = D.getEnemies();
 		
 		switch(event.getCode()){
 		case W:
-			for (Enemy E : P.getEnemies()){
-				if (E.getX() == P.getX() && E.getY() == P.getY() - 1){
+			for (Enemy E : enemies){
+				if (E.getX() == D.getPlayerX() && E.getY() == D.getPlayerY() - 1){
 					E.setVisible(false);
-					P.getDungeon().removeEnemy(E);			
+					D.removeEnemy(E);			
 					break;
 				}
 			}
         	break;
         case A:
-        	for (Enemy E : P.getEnemies()){
-				if (E.getX() == P.getX() - 1 && E.getY() == P.getY() ){
+        	for (Enemy E : enemies){
+				if (E.getX() == D.getPlayerX() - 1 && E.getY() == D.getPlayerY() ){
 					E.setVisible(false);
-					P.removeEnemy(E);
-					P.getDungeon().removeEnemy(E);
-					P.getDungeon().removeEntity(E);
-
+					D.removeEnemy(E);
 					break;
 				}
 			}
             break;
         case S:
-        	for (Enemy E : P.getEnemies()){
-				if (E.getX() == P.getX() && E.getY() == P.getY() + 1){
+        	for (Enemy E : enemies){
+				if (E.getX() == D.getPlayerX() && E.getY() == D.getPlayerY() + 1){
 					E.setVisible(false);
-					P.removeEnemy(E);
-					P.getDungeon().removeEnemy(E);
-					P.getDungeon().removeEntity(E);
-
+					D.removeEnemy(E);
 					break;
 				}
 			}
             break;
         case D:
-        	for (Enemy E : P.getEnemies()){
-				if (E.getX() == P.getX() + 1 && E.getY() == P.getY()){
+        	for (Enemy E : enemies){
+				if (E.getX() == D.getPlayerX() + 1 && E.getY() == D.getPlayerY()){
 					E.setVisible(false);
-					P.removeEnemy(E);
-					P.getDungeon().removeEnemy(E);
-					P.getDungeon().removeEntity(E);
-
+					D.removeEnemy(E);
 					break;
 				}
 			}
@@ -80,6 +72,22 @@ public class Sword extends Item {
 
 	@Override
 	public void useItem() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void useItem(Dungeon D) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void useItem(Player P) {
 		// TODO Auto-generated method stub
 		
 	}
