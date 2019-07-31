@@ -272,6 +272,36 @@ public class Player extends Moveable implements Observable, Observer {
 		return null;
 	}
 	
+	// bomb methods
+	
+
+	public boolean hasBomb(){
+		for (Item item : inventory){
+			if (item instanceof Bomb){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void useBomb(){
+		if (this.hasBomb()) {
+			Bomb b = this.getBomb();
+			b.useItem(this);
+			this.removeItem(b);
+		}
+	}
+	
+	
+	public Bomb getBomb(){
+		for (Item item : inventory){
+			if (item instanceof Bomb){
+				return (Bomb)item;
+			}
+		}
+		return null;
+	}
+	
 	public void removeItem(Item item){
 		for (Item I : inventory){
 			if (I.equals(item)){

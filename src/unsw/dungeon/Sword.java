@@ -30,8 +30,7 @@ public class Sword extends Item {
 		case W:
 			for (Enemy E : enemies){
 				if (E.getX() == D.getPlayerX() && E.getY() == D.getPlayerY() - 1){
-					E.setVisible(false);
-					D.removeEnemy(E);			
+					D.removeEnemy(E);
 					break;
 				}
 			}
@@ -39,7 +38,6 @@ public class Sword extends Item {
         case A:
         	for (Enemy E : enemies){
 				if (E.getX() == D.getPlayerX() - 1 && E.getY() == D.getPlayerY() ){
-					E.setVisible(false);
 					D.removeEnemy(E);
 					break;
 				}
@@ -48,7 +46,6 @@ public class Sword extends Item {
         case S:
         	for (Enemy E : enemies){
 				if (E.getX() == D.getPlayerX() && E.getY() == D.getPlayerY() + 1){
-					E.setVisible(false);
 					D.removeEnemy(E);
 					break;
 				}
@@ -57,7 +54,6 @@ public class Sword extends Item {
         case D:
         	for (Enemy E : enemies){
 				if (E.getX() == D.getPlayerX() + 1 && E.getY() == D.getPlayerY()){
-					E.setVisible(false);
 					D.removeEnemy(E);
 					break;
 				}

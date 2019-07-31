@@ -152,13 +152,13 @@ public class Dungeon {
     
     
     public void addEnemy(Enemy enemy){
-    	this.enemies.add(enemy);
-    	this.player.addEnemy(enemy);
+    	this.getEnemies().add(enemy);
+    	this.getPlayer().addEnemy(enemy);
     }
     
     public void removeEnemy(Enemy enemy){
-    	this.enemies.remove(enemy);
-    	this.entities.remove(enemy);
+    	this.getEnemies().remove(enemy);
+    	this.removeEntity(enemy);
     }
     
     public ArrayList<Enemy> getEnemies() {
@@ -298,6 +298,7 @@ public class Dungeon {
 		return switchTriggers;
 	}
 	
+    
 	public boolean isIncinerated(Entity entity, Bomb b) {
 		if (b.isExploded() == true) {
 	    	if ((entity.getX() >= b.getX() - 1 && entity.getX() <= b.getX() + 1) &&
