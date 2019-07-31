@@ -38,7 +38,7 @@ public class Door extends Moveable  {
 				if (key.getId() == this.getId()) {
 					this.setOpened(true);
 					player.removeItem(key);
-
+					break;
 				}
 			}
 		}

@@ -30,9 +30,7 @@ public class Sword extends Item {
 			for (Enemy E : P.getEnemies()){
 				if (E.getX() == P.getX() && E.getY() == P.getY() - 1){
 					E.setVisible(false);
-					P.removeEnemy(E);
-					P.getDungeon().removeEnemy(E);
-					P.getDungeon().removeEntity(E);
+					P.getDungeon().removeEnemy(E);			
 					break;
 				}
 			}

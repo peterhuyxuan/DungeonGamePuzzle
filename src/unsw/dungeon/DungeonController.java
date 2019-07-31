@@ -2,6 +2,8 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -24,11 +26,16 @@ public class DungeonController {
     private Player player;
 
     private Dungeon dungeon;
-
+    
+    public Timer timer;
+    
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
+        this.timer = new Timer();
+        this.timer.scheduleAtFixedRate(new EnemyMoveTimerTask(this.dungeon), 1, 500);
+        this.timer.scheduleAtFixedRate(new CheckPlayerAliveTimerTask(this.player, this.dungeon, this.timer), 1, 1);
     }
 
     @FXML
@@ -47,6 +54,7 @@ public class DungeonController {
 
     }
     
+    /*
     @FXML
     public void initializeDirt() {
         Image ground = new Image("/dirt_0_new.png");
@@ -57,7 +65,13 @@ public class DungeonController {
                 squares.add(new ImageView(ground), x, y);
             }
         }
-    }
+    }*/
+    
+    /*
+    @FXML
+    public void attachEnemyToTimer(){
+    	timer.scheduleAtFixedRate(dungeon.g, 1, INDEFINITE);
+    }*/
 
     // This game is pseudo turn based
     @FXML
@@ -98,7 +112,7 @@ public class DungeonController {
         
         squares.getChildren().remove(initialEntities.get(3));
         
-        dungeon.checkDungeonInteractions();
+        dungeon.checkPlayerDungeonInteractions();
         
         // Concurrency error if set to void???? 
        

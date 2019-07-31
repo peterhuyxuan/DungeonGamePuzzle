@@ -27,8 +27,8 @@ public class Potion extends Item implements Observer{
 	}
 
 	@Override
-	public int update() {
-		return this.degrade();
+	public void update() {
+		this.degrade();
 	}
 
 	@Override

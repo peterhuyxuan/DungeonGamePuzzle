@@ -10,7 +10,7 @@ import javafx.scene.input.KeyEvent;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Moveable implements Observable{
+public class Player extends Moveable implements Observable, Observer {
 
     public ArrayList<Enemy> enemies;
     public ArrayList<Item> inventory;
@@ -174,7 +174,8 @@ public class Player extends Moveable implements Observable{
 		Potion potion = null;
 		if (this.hasPotion()) {
 			potion = this.getPotion();
-			if (potion.update() == 0) {
+			potion.update();
+			if (potion.getMoves() == 0) {
 				this.removeItem(potion);
 			}
 		}
@@ -245,7 +246,6 @@ public class Player extends Moveable implements Observable{
 			Sword sword = this.getSword();
 			sword.useItem(event, this);
 			if (sword.getStrikes() == 0){
-				//System.out.println("removing sword");
 				this.removeItem(sword);
 			}
 		}
@@ -331,6 +331,19 @@ public class Player extends Moveable implements Observable{
 	public boolean canMoveRight() {
 		// Not use
 		return false;
+	}
+
+
+	@Override
+	public void update(boolean hasPotion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void  update() {
+		this.setEnemies(this.dungeon.getEnemies());
 	}
 
 

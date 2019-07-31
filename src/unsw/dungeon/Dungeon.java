@@ -26,7 +26,7 @@ public class Dungeon {
 
     private int width, height;
     private List<Entity> entities;
-    private ArrayList<Entity> removedEntities;
+    //private ArrayList<Entity> removedEntities;
     private ArrayList<Item> items;
     private ArrayList<Enemy> enemies;
     private Moveable[][] WallBoulderDoor2DArray;
@@ -39,7 +39,7 @@ public class Dungeon {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<>();
-        this.removedEntities = new ArrayList<>();
+        //this.removedEntities = new ArrayList<>();
         this.enemies = new ArrayList<>();
         this.WallBoulderDoor2DArray = new Moveable[width][height];
         this.player = null;
@@ -67,10 +67,9 @@ public class Dungeon {
     }
     
 
-    public void checkDungeonInteractions(){
+    public void checkPlayerDungeonInteractions(){
     	this.itemPickUp();
     	this.treasurePickUp();
-    	this.checkPlayerEnemyCollision();
     	this.update2DArray();
     }
     
@@ -79,9 +78,7 @@ public class Dungeon {
     		if (enemy.getX() == player.getX() && enemy.getY() == player.getY()){
     			if (player.EnemyDies()){
     				System.out.println("Enemy dies");
-
     				removeEntity(enemy);
-    				player.removeEnemy(enemy);
     			} else {
     				player.setAlive(false);
     			}
@@ -119,6 +116,7 @@ public class Dungeon {
     
     public void removeTreasure(Treasure treasure){
     	treasures.remove(treasure);
+    	this.removeEntity(treasure);
     }
     
 
@@ -128,24 +126,27 @@ public class Dungeon {
     
     public void removeEntity(Entity entity){
     	entities.remove(entity);
-    	removedEntities.add(entity);
+		entity.setVisible(false);
+    	//removedEntities.add(entity);
     }
     
-    
+    /*
     public ArrayList<Entity> getRemovedEntities() {
 		return removedEntities;
 	}
 
 	public void setRemovedEntities(ArrayList<Entity> removedEntities) {
 		this.removedEntities = removedEntities;
-	}
+	}*/
 
 	public void addItem(Item item){
     	items.add(item);
+
     }
     
     public void removeItem(Entity item){
     	items.remove(item);
+    	this.removeEntity(item);
     }
     
     
