@@ -44,15 +44,16 @@ public class Enemy extends Moveable implements Observer {
 				return;
 			}
 		} else if (Math.abs(xDiff) == 0) {
-		     if (yDiff < 0 && this.canMoveUp() && moved == false){
+		     if (yDiff < 0 && this.canMoveUp()){
 			 y().set(getY() - moveState.moveDirection(1));
 			 return;
-		     } else if (yDiff > 0 && this.canMoveDown() && moved == false) {
+		     } else if (yDiff > 0 && this.canMoveDown()) {
 			 y().set(getY() + moveState.moveDirection(1));
 			 return;
 		     }
 		}
-
+		
+		// add randomness to enemy moments so they dont "clump"
 		if (randomInt == 0){
 			if (xDiff < 0 && this.canMoveLeft()){
 				this.moveLeft();
@@ -69,6 +70,21 @@ public class Enemy extends Moveable implements Observer {
 				 this.moveDown();
 				 return;
 			}
+		}
+		
+		if (yDiff < 0 && this.canMoveUp()){
+			 y().set(getY() - moveState.moveDirection(1));
+			 return;
+		} else if (yDiff > 0 && this.canMoveDown()) {
+			 y().set(getY() + moveState.moveDirection(1));
+			 return;
+		}
+		if (xDiff < 0 && this.canMoveLeft()){
+			x().set(getX() - moveState.moveDirection(1));
+			return;
+		} else if (xDiff > 0 && this.canMoveRight()) {
+			x().set(getX() + moveState.moveDirection(1));
+			return;
 		}
 	}
 		
