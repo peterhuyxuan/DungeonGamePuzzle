@@ -190,9 +190,6 @@ public class Player extends Moveable implements Observable, Observer {
 		this.enemies.remove(enemy);	
 	}
 	
-	public ArrayList<Enemy> getEnemies() {
-		return enemies;
-	}
 
 	public void setEnemies(ArrayList<Enemy> enemies) {
 		this.enemies = enemies;

@@ -6,7 +6,7 @@ import javafx.scene.input.KeyEvent;
 
 public class Potion extends Item implements Observer{
 	
-	public int moves = 20;
+	
 	
     public Potion(int x, int y) {
         super(x, y);   
