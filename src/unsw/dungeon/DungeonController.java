@@ -7,10 +7,14 @@ import java.util.TimerTask;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -28,6 +32,7 @@ public class DungeonController {
     private GridPane squares;
 
     private List<ImageView> initialEntities;
+    //private List<ImageView> animationImages;
 
     private Player player;
 
@@ -39,8 +44,9 @@ public class DungeonController {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
+        //this.animationImages = new ArrayList<>(animation);
         this.timer = new Timer();
-        this.timer.scheduleAtFixedRate(new EnemyMoveTimerTask(this.dungeon), 1, 300);
+        this.timer.scheduleAtFixedRate(new EnemyMoveTimerTask(this.dungeon), 1, 9999999);
         this.timer.scheduleAtFixedRate(new CheckPlayerAliveTimerTask(this.player, this.dungeon, this.timer), 1, 1);
     }
 
@@ -81,13 +87,20 @@ public class DungeonController {
 
     /*
     @FXML
-    public void BombAnimation(){
-    	this.timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event){
-				game.tick();
-			}
-		}));
-		timeline.setCycleCount(Animation.INDEFINITE);
+    public void BombAnimation(KeyEvent event){
+        final Timeline timeline = new Timeline();
+   	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), new KeyValue (bomb.getLit1(), true)));
+   	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit2(), true)));
+   	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit3(), true)));
+   	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit4(), true)));
+   	 	
+   	 	this.bomb = bomb;
+		timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), new KeyValue (bomb.getLit1(), true)));
+	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit2(), true), new KeyValue (bomb.getLit1(), false)));
+	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit3(), true), new KeyValue (bomb.getLit2(), false)));
+	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit4(), true), new KeyValue (bomb.getLit3(), false)));
+	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit4(), false)));
+
     }*/
     
     // This game is pseudo turn based
@@ -95,6 +108,7 @@ public class DungeonController {
     public void handleKeyPress(KeyEvent event) {
     	
     	if (!player.isAlive()){
+    		timer.cancel();
     		return;
     	}
     	
@@ -129,38 +143,23 @@ public class DungeonController {
         case B:
         	player.useBomb();	
             break;
+        case Q:
+        	timer.cancel();
+            break;
         default:
             break;
         }
-        
-        
-        
-        dungeon.checkPlayerDungeonInteractions();
-        
-        // Concurrency error if set to void???? 
        
-        
-        //if (!(item == null)){
-        	//System.out.println("Removing Item");
-        	//initialEntities.remove(item);
-        	//ImageView image = initialEntities.get(item.getX() * item.getY());
-        	//squares.getChildren().remove(image);
-        	//Image ground = new Image("/dirt_0_new.png");
-        	//squares.add(new ImageView(ground), item.getX(), item.getY());
-        	//squares.getChildren().add(entity);
-        //}   
+        dungeon.checkPlayerDungeonInteractions();
 
-        //System.out.println("HELLo");
-        //System.out.println("WHATTS");
     }
     
-    /*
-    @FXML
+    
     public void checkGoalsComplete() {
         if (dungeon.checkGoal()){
         	System.exit(1);
         }
-    }*/
+    }
 
 }
 

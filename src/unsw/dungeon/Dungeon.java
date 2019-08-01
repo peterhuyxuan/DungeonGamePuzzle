@@ -269,6 +269,16 @@ public class Dungeon {
     	return null;
     }
     
+    public ArrayList<Boulder> getBoulders() {
+    	ArrayList<Boulder> boulders = new ArrayList<>();
+    	for (Entity entity : entities){
+    		if (entity instanceof Boulder){
+    			boulders.add((Boulder)entity);
+    		}
+    	}
+    	return boulders;
+    }
+    
     public Entity getFloorSwitch() {
     	for (Entity entity : entities){
     		if (entity instanceof FloorSwitch){

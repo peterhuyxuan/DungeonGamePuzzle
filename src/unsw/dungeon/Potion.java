@@ -21,12 +21,7 @@ public class Potion extends Item {
 		System.out.println("player invicible");
 		Timer t = new Timer();
 		t.schedule(new PlayerInviFalse(P), 5000);
-	}
-
-	@Override
-	public void useItem(KeyEvent event, Dungeon D) {
-		// TODO Auto-generated method stub
-		
+		t.schedule(new CancelTimerTimerTask(t), 5001);
 	}
 	
 	 class PlayerInviFalse extends TimerTask {
@@ -42,6 +37,12 @@ public class Potion extends Item {
 	        }
 
 	    }
+	 
+	 @Override
+		public void useItem(KeyEvent event, Dungeon D) {
+			// TODO Auto-generated method stub
+			
+		}
 
 	@Override
 	public void useItem() {
