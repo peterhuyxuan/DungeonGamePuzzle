@@ -2,14 +2,17 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 public class Door extends Moveable  {
 	public int id;
-	public boolean opened;
+	public BooleanProperty opened;
 	
     public Door(int id, int x, int y, Dungeon dungeon) {
         super(x, y, dungeon); 
         this.id = id;
-        this.opened = false;
+        this.opened = new SimpleBooleanProperty();
     }
 
 	public int getId() {
@@ -21,13 +24,17 @@ public class Door extends Moveable  {
 	}
 
 	public boolean isOpened() {
-		return opened;
+		return opened.getValue();
 	}
 
 	public void setOpened(boolean opened) {
-		this.opened = opened;
+		this.opened.set(opened);
 	}
 	
+	public BooleanProperty getOpened() {
+		return opened;
+	}
+
 	public void openDoor(){
 		System.out.println("Attempting to open");
 		Player player = this.getDungeon().getPlayer();
@@ -37,6 +44,7 @@ public class Door extends Moveable  {
 				Key key = (Key) item;
 				if (key.getId() == this.getId()) {
 					this.setOpened(true);
+					this.setVisible(false);
 					player.removeItem(key);
 					break;
 				}

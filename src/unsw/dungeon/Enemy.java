@@ -119,6 +119,12 @@ public class Enemy extends Moveable implements Observer {
 
     @Override
     public boolean canMoveUp(){
+    	if (getAboveTile() instanceof Door){
+    		Door door = (Door)getAboveTile();
+    		if(door.isOpened()){
+    			return true;
+    		}
+    	}
     	if (getAboveTile() != null){
     		return false;
     	} else {
@@ -128,6 +134,12 @@ public class Enemy extends Moveable implements Observer {
     
     @Override
     public boolean canMoveDown(){
+    	if (getBelowTile() instanceof Door){
+    		Door door = (Door)getBelowTile();
+    		if(door.isOpened()){
+    			return true;
+    		}
+    	}
     	if (getBelowTile() != null){
     		return false;
     	} else {
@@ -137,6 +149,12 @@ public class Enemy extends Moveable implements Observer {
     
     @Override
     public boolean canMoveRight(){
+    	if (getRightTile() instanceof Door){
+    		Door door = (Door)getRightTile();
+    		if(door.isOpened()){
+    			return true;
+    		}
+    	}
     	if (getRightTile() != null){
     		return false;
     	} else {
@@ -146,6 +164,12 @@ public class Enemy extends Moveable implements Observer {
     
     @Override
     public boolean canMoveLeft(){
+    	if (getLeftTile() instanceof Door){
+    		Door door = (Door)getLeftTile();
+    		if(door.isOpened()){
+    			return true;
+    		}
+    	}
     	if (getLeftTile() != null){
     		return false;
     	} else {

@@ -38,7 +38,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image switchImage;
     private Image boulderImage;
     private Image keyImage;
-    private Image doorImage;
+    private Image doorOpenImage;
+    private Image doorCloseImage;
     private Image enemyImage;
     private Image swordImage;
     private Image potionImage;
@@ -62,7 +63,8 @@ public class DungeonControllerLoader extends DungeonLoader {
         switchImage = new Image("pressure_plate.png");
         boulderImage = new Image("boulder.png");
         keyImage = new Image("key.png");
-        doorImage = new Image("closed_door.png");
+        doorOpenImage = new Image("open_door.png");
+        doorCloseImage = new Image("closed_door.png");
         enemyImage = new Image("deep_elf_master_archer.png");
         swordImage = new Image("greatsword_1_new.png");
         potionImage = new Image("bubbly.png");
@@ -113,8 +115,12 @@ public class DungeonControllerLoader extends DungeonLoader {
     
     @Override
     public void onLoad(Door door) {
-        ImageView view = new ImageView(doorImage);
-        addEntity(door, view);
+        ImageView open = new ImageView(doorOpenImage);
+        this.trackVisBP(door.getOpened(), open);
+        addAnimation(door, open);
+        
+        ImageView close = new ImageView(doorCloseImage);
+        addEntity(door, close);
     }
     
     @Override
@@ -146,19 +152,19 @@ public class DungeonControllerLoader extends DungeonLoader {
         ImageView view = new ImageView(bombImage);
         
         ImageView lit1 = new ImageView(this.lit1);
-        this.trackLit(bomb.getLit1(), lit1);
+        this.trackVisBP(bomb.getLit1(), lit1);
         addAnimation(bomb, lit1);
         
         ImageView lit2 = new ImageView(this.lit2);
-        this.trackLit(bomb.getLit2(), lit2);
+        this.trackVisBP(bomb.getLit2(), lit2);
         addAnimation(bomb, lit2);
         
         ImageView lit3 = new ImageView(this.lit3);
-        this.trackLit(bomb.getLit3(), lit3);
+        this.trackVisBP(bomb.getLit3(), lit3);
         addAnimation(bomb, lit3);
         
         ImageView lit4 = new ImageView(this.lit4);
-        this.trackLit(bomb.getLit4(), lit4);
+        this.trackVisBP(bomb.getLit4(), lit4);
         addAnimation(bomb, lit4);
      
         addEntity(bomb, view);
@@ -215,7 +221,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
     
-    private void trackLit(BooleanProperty b, final Node node) {
+    private void trackVisBP(BooleanProperty b, final Node node) {
         b.addListener(new ChangeListener<Boolean>() {
         	@Override
             public void changed(ObservableValue<? extends Boolean> observable,

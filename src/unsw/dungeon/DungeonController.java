@@ -40,13 +40,14 @@ public class DungeonController {
     
     public Timer timer;
     
+    
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
         //this.animationImages = new ArrayList<>(animation);
         this.timer = new Timer();
-        this.timer.scheduleAtFixedRate(new EnemyMoveTimerTask(this.dungeon), 1, 9999999);
+        this.timer.scheduleAtFixedRate(new EnemyMoveTimerTask(this.dungeon), 1, 300);
         this.timer.scheduleAtFixedRate(new CheckPlayerAliveTimerTask(this.player, this.dungeon, this.timer), 1, 1);
     }
 
