@@ -6,7 +6,7 @@ public class BouldersGoal implements GoalCondition {
 //		boolean currentGoalCondition = true;
 		for (Entity entity : D.getEntities()) {
 			if (entity instanceof FloorSwitch) {
-				if (!(D.getTile(entity.getX(), entity.getY() - 1) instanceof Boulder)) {
+				if (!(D.getTile(entity.getX(), entity.getY()) instanceof Boulder)) {
 //					currentGoalCondition = false;
 //					break;
 					return false;

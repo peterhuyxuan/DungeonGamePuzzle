@@ -32,7 +32,7 @@ public class Dungeon {
     private Moveable[][] WallBoulderDoor2DArray;
     private Player player;
     private GoalComponentsComplete goal;
-    private List<SwitchTrigger> switchTriggers;
+    private List<FloorSwitch> floorSwitches;
     private List<Treasure> treasures;
 
     public Dungeon(int width, int height) {
@@ -45,7 +45,7 @@ public class Dungeon {
         this.player = null;
         this.items = new ArrayList<>();
         this.goal = null;
-        this.switchTriggers = new ArrayList<>();
+        this.floorSwitches = new ArrayList<>();
         this.treasures = new ArrayList<>();
 
     }
@@ -300,12 +300,12 @@ public class Dungeon {
 		return entities;
 	}
 	
-	public void addSwitchTrigger(SwitchTrigger trigger) {
-	    switchTriggers.add(trigger);
+	public void addSwitchTrigger(FloorSwitch trigger) {
+	    floorSwitches.add(trigger);
     }
     
-    public List<SwitchTrigger> getSwitchTriggers() {
-		return switchTriggers;
+    public List<FloorSwitch> getSwitchTriggers() {
+		return floorSwitches;
 	}
 	
     

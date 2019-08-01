@@ -84,7 +84,11 @@ public abstract class DungeonLoader {
     		System.out.println("Adding treasure goal");
     		simpleGoal = new Goal(new TreasureGoal()); 
     		break;
-    	}
+	    case "boulders":
+			System.out.println("Adding boulders goal");
+			simpleGoal = new Goal(new BouldersGoal()); 
+			break;
+		}
     	return simpleGoal;
     }
     
