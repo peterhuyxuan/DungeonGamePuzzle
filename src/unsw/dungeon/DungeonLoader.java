@@ -57,8 +57,10 @@ public abstract class DungeonLoader {
     	GoalComponentsComplete goalObj;
     	
     	if (!goalName.contentEquals("AND") && !goalName.contentEquals("OR")){
+    		System.out.println("Adding simple goal");
     		goalObj = loadSimple(goalName);
     	} else {
+    		System.out.println("Adding complex goal");
     		JSONArray subGoals = json.getJSONArray("subgoals");
     		goalObj = loadComplex(goalName, subGoals);
     	}
@@ -71,7 +73,16 @@ public abstract class DungeonLoader {
     	
     	switch (goal) {
     	case "exit":
+    		System.out.println("Adding exit goal");
     		simpleGoal = new Goal(new ExitGoal()); 
+    		break;
+    	case "enemies":
+    		System.out.println("Adding enemy goal");
+    		simpleGoal = new Goal(new EnemyGoal()); 
+    		break;
+    	case "treasure":
+    		System.out.println("Adding treasure goal");
+    		simpleGoal = new Goal(new TreasureGoal()); 
     		break;
     	}
     	return simpleGoal;
@@ -85,12 +96,14 @@ public abstract class DungeonLoader {
 		switch (goal) {
     	
     	case "AND":
+    		System.out.println("Adding AND goal");
     		goal1 = loadGoal(subGoals.getJSONObject(0));
     		goal2 = loadGoal(subGoals.getJSONObject(1));
     		complexGoal = new ComplexGoal(goal1, goal2, AND);
     		break;
     		
     	case "OR":
+    		System.out.println("Adding OR goal");
     		goal1 = loadGoal(subGoals.getJSONObject(0));
     		goal2 = loadGoal(subGoals.getJSONObject(1));
     		complexGoal = new ComplexGoal(goal1, goal2, OR);

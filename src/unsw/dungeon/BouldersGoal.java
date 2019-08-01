@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class SwitchTrigger implements GoalCondition {
+public class BouldersGoal implements GoalCondition {
 	@Override
 	public boolean checkGoal(Dungeon D) {
 //		boolean currentGoalCondition = true;

@@ -89,7 +89,7 @@ class TestGoal {
 	@Test
 	void testOneFloorSwitchOff() {
 		Dungeon switchOffTest = new Dungeon(1,3);
-		GoalCondition gc = new SwitchTrigger();
+		GoalCondition gc = new BouldersGoal();
 		GoalComponentsComplete goal = new Goal(gc);
 		switchOffTest.setGoal(goal);
 		Boulder boulder = new Boulder(switchOffTest, 0,0);

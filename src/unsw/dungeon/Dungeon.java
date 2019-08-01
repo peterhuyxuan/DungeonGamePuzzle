@@ -77,7 +77,7 @@ public class Dungeon {
     	for (Enemy enemy : enemies){
     		if (enemy.getX() == player.getX() && enemy.getY() == player.getY()){
     			if (player.EnemyDies()){
-    				System.out.println("Enemy dies");
+    				//System.out.println("Enemy dies");
     				removeEntity(enemy);
     			} else {
     				player.setAlive(false);

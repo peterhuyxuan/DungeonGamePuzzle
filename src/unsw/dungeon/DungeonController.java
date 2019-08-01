@@ -48,7 +48,8 @@ public class DungeonController {
         //this.animationImages = new ArrayList<>(animation);
         this.timer = new Timer();
         this.timer.scheduleAtFixedRate(new EnemyMoveTimerTask(this.dungeon), 1, 300);
-        this.timer.scheduleAtFixedRate(new CheckPlayerAliveTimerTask(this.player, this.dungeon, this.timer), 1, 1);
+        this.timer.scheduleAtFixedRate(new CheckPlayerAliveTimerTask(this.player, this.dungeon, this.timer), 1, 2);
+        this.timer.scheduleAtFixedRate(new GoalCompleteTimerTask(this.dungeon, this.timer), 1, 2);
     }
 
     @FXML
