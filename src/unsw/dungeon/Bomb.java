@@ -32,29 +32,7 @@ public class Bomb extends Item {
 		this.exploded = exploded;
 	}
 	
-	public void plantBomb(int x, int y) {
-		IntegerProperty xInt = new SimpleIntegerProperty(x);
-		IntegerProperty yInt = new SimpleIntegerProperty(y);
-		this.setX(xInt);
-		this.setY(yInt);
-		setPickedUp(false);
-		Timer t = new java.util.Timer();
-		t.schedule( 
-		        new java.util.TimerTask() {
-		            @Override
-		            public void run() {
-		            	setExploded(true);
-		            }
-		        }, 
-		        5000 
-		);
-	}
 
-	@Override
-	public void useItem() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void useItem(KeyEvent event, Dungeon D) {
@@ -64,12 +42,22 @@ public class Bomb extends Item {
 
 	@Override
 	public void useItem(Dungeon D) {
+		this.x().set(D.getPlayerX());
+		this.y().set(D.getPlayerY());
+		this.setVisible(true);
+		setPickedUp(false);
+		Timer t = new java.util.Timer();
+		t.schedule(new BombExplodedTimerTask(D, this), 5000);
+	}
+
+	@Override
+	public void useItem(Player P) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void useItem(Player P) {
+	public void useItem() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -287,7 +287,7 @@ public class Player extends Moveable implements Observable, Observer {
 	public void useBomb(){
 		if (this.hasBomb()) {
 			Bomb b = this.getBomb();
-			b.useItem(this);
+			b.useItem(this.getDungeon());
 			this.removeItem(b);
 		}
 	}

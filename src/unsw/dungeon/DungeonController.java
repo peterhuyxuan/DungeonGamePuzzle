@@ -34,7 +34,7 @@ public class DungeonController {
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
         this.timer = new Timer();
-        this.timer.scheduleAtFixedRate(new EnemyMoveTimerTask(this.dungeon), 1, 300);
+        this.timer.scheduleAtFixedRate(new EnemyMoveTimerTask(this.dungeon), 1, 9999999);
         this.timer.scheduleAtFixedRate(new CheckPlayerAliveTimerTask(this.player, this.dungeon, this.timer), 1, 1);
     }
 
@@ -107,9 +107,10 @@ public class DungeonController {
         	player.useSword(event);
             break;
         case E:
-        	
-        	player.usePotion();
-        	
+        	player.usePotion();	
+            break;
+        case B:
+        	player.useBomb();	
             break;
         default:
             break;
