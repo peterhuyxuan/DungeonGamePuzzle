@@ -28,7 +28,8 @@ import javafx.util.Duration;
 public class DungeonControllerLoader extends DungeonLoader {
 
     private List<ImageView> entities;
-    //private List<ImageView> animationImages;
+    private ImageView player;
+    private List<ImageView> enemies;
 
 
     //Images
@@ -56,6 +57,7 @@ public class DungeonControllerLoader extends DungeonLoader {
             throws FileNotFoundException {
         super(filename);
         entities = new ArrayList<>();
+        enemies = new ArrayList<>();
         //animationImages = new ArrayList<>();
         playerImage = new Image("/human_new.png");
         wallImage = new Image("/brick_brown_0.png");
@@ -80,7 +82,12 @@ public class DungeonControllerLoader extends DungeonLoader {
     @Override
     public void onLoad(Entity player) {
         ImageView view = new ImageView(playerImage);
-        addEntity(player, view);
+        //trackPosition(entity, view);
+        GridPane.setColumnIndex(view, player.getX());
+        GridPane.setRowIndex(view, player.getY());
+        trackVisible(player, view);     
+        entities.add(view);
+        this.player = view;
     }
 
     @Override
@@ -127,6 +134,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     public void onLoad(Enemy enemy) {
         ImageView view = new ImageView(enemyImage);
         addEntity(enemy, view);
+        enemies.add(view);
     }
     
     @Override
@@ -238,7 +246,7 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @throws FileNotFoundException
      */
     public DungeonController loadController() throws FileNotFoundException {
-        return new DungeonController(load(), entities);
+        return new DungeonController(load(), entities, this.player, this.enemies);
     }
 
 

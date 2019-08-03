@@ -19,9 +19,9 @@ public class CheckPlayerAliveTimerTask extends TimerTask {
 	public void run() {
 		dungeon.checkPlayerEnemyCollision();
 		if (!player.isAlive()) {
+			System.out.println("PLAYER DIESS!!!!");
 			timer.cancel();
-			//dungeon.setEnemies(null);
-			//dungeon.setPlayer(null);
+			dungeon.removeEntity(player);
 		}
 			
 	}
