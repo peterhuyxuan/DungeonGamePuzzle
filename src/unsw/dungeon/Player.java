@@ -18,6 +18,8 @@ public class Player extends Moveable implements Observable, Observer {
     public ArrayList<Item> inventory;
     public boolean moving = false;
     public boolean moved = false;
+    //public BooleanProperty left;
+    //public BooleanProperty right;
     BooleanProperty Invi;
     boolean Alive;
 

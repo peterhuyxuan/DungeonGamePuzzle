@@ -62,7 +62,6 @@ public class DungeonController {
     
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities,  ImageView playerImage,  List<ImageView> initialEnemies) {
         this.dungeon = dungeon;
-        Sprite s = new Sprite();
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
         this.playerImage = playerImage;
