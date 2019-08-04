@@ -139,33 +139,6 @@ public class Player extends Moveable implements Observable, Observer {
     		this.setMoved(false);
     	}
 
-    	/*
-    	Entity rightEntity = getRightTile();
-
-    	if (rightEntity instanceof Wall) {
-    		return;
-    	} else if (rightEntity instanceof Boulder) {
-    		Boulder boulder = (Boulder)rightEntity;   		
-    		if (boulder.canMoveRight()){
-    			boulder.moveRight();
-    			dungeon.update2DArray();
-    			this.movePlayerRight();
-    			return;
-    		} else {
-    			return;
-    		}   	
-    	} else if (rightEntity instanceof Door) { 
-    		Door door = (Door)rightEntity; 
-    		this.openDoor(door);
-    		if (door.isOpened()){
-    			this.movePlayerRight();
-    			return;
-    		} else {
-    			return;
-    		}  
-    	}  else {
-            this.movePlayerRight();
-    	}*/
     }
     
     public void movePlayerUp(){
@@ -227,11 +200,6 @@ public class Player extends Moveable implements Observable, Observer {
     	return this.getInvi().get();
     }
     
-    
-	//public void pickUpItem(Entity item){
-	//	inventory.add(item);
-	//}
-
 	public ArrayList<Item> getInventory() {
 		return inventory;
 	}

@@ -82,57 +82,10 @@ public class DungeonController {
 
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
-        
-        //squares.getChildren().add(3, playerImage);
-        
-        /*
-        for (int i = 1; i < squares.getChildren().size(); i++){
-            TranslateTransition tt = new TranslateTransition(Duration.millis(2000), squares.getChildren().get(i));
-            tt.setByX(i%2 == 0 ? -25 : 25);
-            tt.setByY(i%2 == 0 ? -25 : 25);
-            //tt.setCycleCount(Animation.INDEFINITE);//set to 1
-            //tt.setAutoReverse(true); //dont need this
-            tt.play();
-        }*/
+
 
     }
     
-    /*
-    @FXML
-    public void initializeDirt() {
-        Image ground = new Image("/dirt_0_new.png");
-
-        // Add the ground first so it is below all other entities
-        for (int x = 0; x < dungeon.getWidth(); x++) {
-            for (int y = 0; y < dungeon.getHeight(); y++) {
-                squares.add(new ImageView(ground), x, y);
-            }
-        }
-    }*/
-    
-    /*
-    @FXML
-    public void attachEnemyToTimer(){
-    	timer.scheduleAtFixedRate(dungeon.g, 1, INDEFINITE);
-    }*/
-
-    /*
-    @FXML
-    public void BombAnimation(KeyEvent event){
-        final Timeline timeline = new Timeline();
-   	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), new KeyValue (bomb.getLit1(), true)));
-   	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit2(), true)));
-   	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit3(), true)));
-   	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit4(), true)));
-   	 	
-   	 	this.bomb = bomb;
-		timeline.getKeyFrames().add(new KeyFrame(Duration.millis(0), new KeyValue (bomb.getLit1(), true)));
-	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit2(), true), new KeyValue (bomb.getLit1(), false)));
-	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit3(), true), new KeyValue (bomb.getLit2(), false)));
-	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit4(), true), new KeyValue (bomb.getLit3(), false)));
-	 	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), new KeyValue (bomb.getLit4(), false)));
-
-    }*/
     
     // This game is pseudo turn based
     @FXML
