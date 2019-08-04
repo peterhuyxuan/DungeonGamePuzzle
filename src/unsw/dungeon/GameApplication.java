@@ -43,8 +43,10 @@ public class GameApplication extends Application {
         
         levelThreeCompleted.getController().setDungeonLevel3(dungeonLevel3);
         levelThreeCompleted.getController().setDungeonLevel4(dungeonLevel4);
+        levelThreeCompleted.getController().setMainMenu(mainMenuScreen);
         
         levelFourCompleted.getController().setDungeonLevel4(dungeonLevel4);
+        levelFourCompleted.getController().setMainMenu(mainMenuScreen);
         
         deathLevelThree.getController().setDungeonLevel3(dungeonLevel3);
         deathLevelThree.getController().setMainMenu(mainMenuScreen);
