@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Boulder goal interface for strategy pattern
+ * @author Doobies, Harry Lording, Peter Ngyuern 
+ *	
+ */
 public class BouldersGoal implements GoalCondition {
 	@Override
 	public boolean checkGoal(Dungeon D) {

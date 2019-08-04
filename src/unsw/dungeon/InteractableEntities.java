@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Interactable entity class for entities that cna move
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class InteractableEntities extends Entity {
 	
 	public boolean canMove;

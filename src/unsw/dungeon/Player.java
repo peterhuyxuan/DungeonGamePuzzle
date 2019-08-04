@@ -9,13 +9,15 @@ import javafx.scene.input.KeyEvent;
 
 /**
  * The player entity
- * @author Robert Clifton-Everest
+ * @author Robert Clifton-Everest,Doobies, Harry Lording, Peter Nguyen
  *
  */
 public class Player extends Moveable implements Observable, Observer {
 
     public ArrayList<Enemy> enemies;
     public ArrayList<Item> inventory;
+    public boolean moving = false;
+    public boolean moved = false;
     BooleanProperty Invi;
     boolean Alive;
 
@@ -31,9 +33,34 @@ public class Player extends Moveable implements Observable, Observer {
         this.Alive = true;
         this.Invi = new SimpleBooleanProperty(false); 
     }
-
     
-    public BooleanProperty getInvi() {
+    
+
+	public boolean isMoved() {
+		return moved;
+	}
+
+
+
+	public void setMoved(boolean moved) {
+		this.moved = moved;
+	}
+
+
+
+	public boolean isMoving() {
+		return moving;
+	}
+
+
+
+	public void setMoving(boolean moving) {
+		this.moving = moving;
+	}
+
+
+
+	public BooleanProperty getInvi() {
 		return Invi;
 	}
 
@@ -64,7 +91,7 @@ public class Player extends Moveable implements Observable, Observer {
     		dungeon.update2DArray();
     		this.movePlayerUp();
     	} else {
-    		return;
+    		this.setMoved(false);
     	}
     }
 
@@ -79,7 +106,7 @@ public class Player extends Moveable implements Observable, Observer {
     		dungeon.update2DArray();
     		this.movePlayerDown();
     	} else {
-    		return;
+    		this.setMoved(false);
     	}
     }
 
@@ -94,7 +121,7 @@ public class Player extends Moveable implements Observable, Observer {
     		dungeon.update2DArray();
     		this.movePlayerLeft();
     	} else {
-    		return;
+    		this.setMoved(false);
     	}
     }
 
@@ -109,54 +136,31 @@ public class Player extends Moveable implements Observable, Observer {
     		dungeon.update2DArray();
     		this.movePlayerRight();
     	} else {
-    		return;
+    		this.setMoved(false);
     	}
 
-    	/*
-    	Entity rightEntity = getRightTile();
-
-    	if (rightEntity instanceof Wall) {
-    		return;
-    	} else if (rightEntity instanceof Boulder) {
-    		Boulder boulder = (Boulder)rightEntity;   		
-    		if (boulder.canMoveRight()){
-    			boulder.moveRight();
-    			dungeon.update2DArray();
-    			this.movePlayerRight();
-    			return;
-    		} else {
-    			return;
-    		}   	
-    	} else if (rightEntity instanceof Door) { 
-    		Door door = (Door)rightEntity; 
-    		this.openDoor(door);
-    		if (door.isOpened()){
-    			this.movePlayerRight();
-    			return;
-    		} else {
-    			return;
-    		}  
-    	}  else {
-            this.movePlayerRight();
-    	}*/
     }
     
     public void movePlayerUp(){
+		this.setMoved(true);
 	    y().set(getY() - 1);
 	    notifyObservers();
     }
     
     public void movePlayerDown(){
-	    y().set(getY() + 1);
+    	this.setMoved(true);
+    	y().set(getY() + 1);
 	    notifyObservers();
     }
     
     public void movePlayerRight(){
+    	this.setMoved(true);
 	    x().set(getX() + 1);
 	    notifyObservers();
     }
     
     public void movePlayerLeft(){
+    	this.setMoved(true);
 	    x().set(getX() - 1);
 	    notifyObservers();
     }
@@ -196,11 +200,6 @@ public class Player extends Moveable implements Observable, Observer {
     	return this.getInvi().get();
     }
     
-    
-	//public void pickUpItem(Entity item){
-	//	inventory.add(item);
-	//}
-
 	public ArrayList<Item> getInventory() {
 		return inventory;
 	}

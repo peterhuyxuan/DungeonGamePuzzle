@@ -19,7 +19,7 @@ import javafx.beans.property.SimpleIntegerProperty;
  * A dungeon can contain many entities, each occupy a square. More than one
  * entity can occupy the same square.
  *
- * @author Robert Clifton-Everest
+ * @author Robert Clifton-Everest, Doobies, Harry Lording, Peter Nguyen
  *
  */
 public class Dungeon {
@@ -74,15 +74,22 @@ public class Dungeon {
     }
     
     public void checkPlayerEnemyCollision(){
-    	for (Enemy enemy : enemies){
-    		if (enemy.getX() == player.getX() && enemy.getY() == player.getY()){
-    			if (player.EnemyDies()){
-    				//System.out.println("Enemy dies");
-    				removeEntity(enemy);
-    			} else {
-    				player.setAlive(false);
-    			}
-    		}
+    	if (this.getEnemies().isEmpty()){
+    		return;
+    	}
+    	
+    	for (int i = 0; i < getEnemies().size(); i++) {
+	    	for (Enemy enemy : enemies){
+	    		if (enemy.getX() == player.getX() && enemy.getY() == player.getY()){
+	    			if (player.EnemyDies()){
+	    				//System.out.println("Enemy dies");
+	    				removeEnemy(enemy);
+	    				break;
+	    			} else {
+	    				player.setAlive(false);
+	    			}
+	    		}
+	    	}
     	}
     }
     
@@ -127,6 +134,7 @@ public class Dungeon {
     public void removeEntity(Entity entity){
     	entities.remove(entity);
 		entity.setVisible(false);
+		//entity = null;
     	//removedEntities.add(entity);
     }
     

@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 
 /**
  * An entity in the dungeon.
- * @author Robert Clifton-Everest
+ * @author Robert Clifton-Everest, Doobies, Harry Lording, Peter Nguyen
  *
  */
 public class Entity {

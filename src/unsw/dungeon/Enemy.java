@@ -4,6 +4,11 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Enemy entity
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class Enemy extends Moveable implements Observer {
 	
 	EnemyMove moveState;
@@ -34,13 +39,10 @@ public class Enemy extends Moveable implements Observer {
 	}
 
 	public void move() {
-		//System.out.println("howdy");
 		int xDiff = xDiff();
 		int yDiff = yDiff();
 		boolean moved = false;
-		int randomInt = random.nextInt(2);
-		//System.out.println(randomInt);
-		
+		int randomInt = random.nextInt(2);		
 		
 		if (Math.abs(yDiff) == 0){
 			if (xDiff < 0 && this.canMoveLeft()){
@@ -186,12 +188,9 @@ public class Enemy extends Moveable implements Observer {
 
 	@Override
 	public void update(boolean hasPotion) {
-
 		if (hasPotion){
-			//System.out.println("Making Evade");
 			this.makeEvade();
 		} else if (!hasPotion) {
-			//System.out.println("Making Attack");
 			this.makeAttack();
 		}
 	}

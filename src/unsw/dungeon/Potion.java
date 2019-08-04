@@ -8,6 +8,11 @@ import org.junit.rules.Timeout;
 
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Potion entity
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class Potion extends Item {
 	
 	

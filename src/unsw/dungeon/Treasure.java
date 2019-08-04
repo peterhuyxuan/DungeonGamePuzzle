@@ -1,5 +1,9 @@
 package unsw.dungeon;
-
+/**
+ * Treasure entity
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class Treasure extends Entity {
     private boolean pickedUp;
 	

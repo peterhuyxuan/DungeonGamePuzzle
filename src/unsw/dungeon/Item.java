@@ -2,6 +2,12 @@ package unsw.dungeon;
 
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Abstract class item that extends entity 
+ * Has abstract methods for items 
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public abstract class Item extends Entity {
 
 	public Item(int x, int y) {

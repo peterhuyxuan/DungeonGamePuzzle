@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Boulder entity
+ * @author Doobies, Harry Lording, Peter Ngyuern 
+ *	
+ */
 public class Boulder extends Moveable {
 	
 	public Boulder(Dungeon dungeon, int x, int y) {

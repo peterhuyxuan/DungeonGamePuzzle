@@ -1,8 +1,8 @@
 package unsw.dungeon;
 
 /**
- * 
- * @author admin
+ * Goal component interface
+ * @author Doobies, Harry Lording, Peter Nguyen
  *
  */
 public interface GoalCondition {

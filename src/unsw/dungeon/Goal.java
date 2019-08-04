@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Goal class that implements a goal strategy
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class Goal implements GoalComponentsComplete{
 	private GoalCondition goalCondition;
 	

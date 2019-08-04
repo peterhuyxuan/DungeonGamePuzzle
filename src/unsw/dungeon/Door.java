@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
+/**
+ * Door entity
+ * @author Doobies, Harry Lording, Peter Ngyuern 
+ *	
+ */
 public class Door extends Moveable  {
 	public int id;
 	public BooleanProperty opened;

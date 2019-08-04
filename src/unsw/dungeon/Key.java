@@ -1,7 +1,11 @@
 package unsw.dungeon;
 
 import javafx.scene.input.KeyEvent;
-
+/**
+ * Key entity for door
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class Key extends Item {
 	int id;
 	
@@ -25,7 +29,19 @@ public class Key extends Item {
 	}
 
 	@Override
-	public void useItem(KeyEvent event, Player P) {
+	public void useItem(KeyEvent event, Dungeon D) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void useItem(Dungeon D) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void useItem(Player P) {
 		// TODO Auto-generated method stub
 		
 	}
