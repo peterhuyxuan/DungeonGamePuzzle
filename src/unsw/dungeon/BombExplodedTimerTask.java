@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+/**
+ * Bomb timer task executes code when bomb explodes
+ * @author Doobies, Harry Lording, Peter Ngyuern 
+ *	
+ */ 
+
 public class BombExplodedTimerTask  extends TimerTask {
 
 	Dungeon dungeon;

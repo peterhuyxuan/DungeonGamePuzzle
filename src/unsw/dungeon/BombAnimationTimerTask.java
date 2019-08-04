@@ -8,6 +8,11 @@ import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
 import javafx.util.Duration;
 
+/**
+ * Bomb timer task that changes bomb visibility property
+ * @author Doobies, Harry Lording, Peter Ngyuern 
+ *	
+ */ 
 public class BombAnimationTimerTask extends TimerTask{
 
 	public BooleanProperty bp;

@@ -4,6 +4,11 @@ package unsw.dungeon;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests for goal
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 class TestGoal {
 
 //	public static void main(String[] args) {

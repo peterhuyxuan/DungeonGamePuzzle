@@ -4,6 +4,11 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Enemy entity
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class Enemy extends Moveable implements Observer {
 	
 	EnemyMove moveState;

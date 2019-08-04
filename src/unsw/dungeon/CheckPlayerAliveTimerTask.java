@@ -3,6 +3,11 @@ package unsw.dungeon;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Timertask that checks if the player is alive 
+ * @author Doobies, Harry Lording, Peter Ngyuern 
+ *	
+ */
 public class CheckPlayerAliveTimerTask extends TimerTask {
 
 	Player player;

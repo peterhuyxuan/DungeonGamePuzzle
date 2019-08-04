@@ -1,6 +1,11 @@
 package unsw.dungeon;
 
 
+/**
+ * Complex goal class that consists of two simple goals
+ * @author Doobies, Harry Lording, Peter Ngyuern 
+ *	
+ */
 public class ComplexGoal implements GoalComponentsComplete{
 	private static final int AND = 0;
 	private static final int OR = 1;

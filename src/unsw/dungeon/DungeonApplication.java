@@ -8,6 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Application class to launch game
+ * @author Robert Clifton-Everest, Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class DungeonApplication extends Application {
 
     @Override

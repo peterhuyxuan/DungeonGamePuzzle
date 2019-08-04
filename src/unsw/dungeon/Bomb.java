@@ -15,6 +15,11 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
+/**
+ * Bomb entity
+ * @author Doobies, Harry Lording, Peter Ngyuern 
+ *	
+ */ 
 public class Bomb extends Item {
     private boolean pickedUp;
     private BooleanProperty lit1;

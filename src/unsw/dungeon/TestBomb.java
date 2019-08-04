@@ -6,6 +6,11 @@ import java.util.Timer;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests for bomb
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 class TestBomb {
 	@Test
 	void testExplosion() {

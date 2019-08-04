@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Abstract class for entities that are interacted with when the player moves
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public abstract class Moveable extends Entity {
 
 	Dungeon dungeon;

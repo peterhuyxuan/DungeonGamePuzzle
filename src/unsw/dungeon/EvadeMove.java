@@ -1,5 +1,11 @@
 package unsw.dungeon;
 
+
+/**
+ * Enemy state class to reverse enemy movement
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class EvadeMove implements EnemyMove {
 
     @Override

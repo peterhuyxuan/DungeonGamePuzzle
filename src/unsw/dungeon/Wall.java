@@ -1,5 +1,10 @@
 package unsw.dungeon;
 
+/**
+ * Wall entity
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class Wall extends Moveable {
 
     public Wall(int x, int y, Dungeon dungeon) {

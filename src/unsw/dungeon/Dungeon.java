@@ -19,7 +19,7 @@ import javafx.beans.property.SimpleIntegerProperty;
  * A dungeon can contain many entities, each occupy a square. More than one
  * entity can occupy the same square.
  *
- * @author Robert Clifton-Everest
+ * @author Robert Clifton-Everest, Doobies, Harry Lording, Peter Nguyen
  *
  */
 public class Dungeon {

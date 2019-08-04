@@ -9,7 +9,7 @@ import javafx.scene.input.KeyEvent;
 
 /**
  * The player entity
- * @author Robert Clifton-Everest
+ * @author Robert Clifton-Everest,Doobies, Harry Lording, Peter Nguyen
  *
  */
 public class Player extends Moveable implements Observable, Observer {

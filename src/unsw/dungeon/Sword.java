@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Sword entity
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class Sword extends Item {
 	
 	public int strikes = 5;

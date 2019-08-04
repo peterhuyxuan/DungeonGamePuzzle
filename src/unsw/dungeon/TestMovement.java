@@ -1,7 +1,11 @@
 package unsw.dungeon;
 
 import org.junit.jupiter.api.Test;
-
+/**
+ * Tests for movement
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class TestMovement {
 	
 //	public static void main(String[] args) {

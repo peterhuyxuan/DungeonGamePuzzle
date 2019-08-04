@@ -3,6 +3,11 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
+/**
+ * TimerTask that executes move for all enemies
+ * @author Doobies, Harry Lording, Peter Nguyen
+ *
+ */
 public class EnemyMoveTimerTask extends TimerTask {
 
 	Dungeon dungeon;

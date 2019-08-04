@@ -1,5 +1,11 @@
 package unsw.dungeon;
 
+/**
+ * Interface for enemy attack state, as part of the state pattern.
+ * @author Doobies, Harry Lording
+ *	
+ */ 
+
 public class AttackMove implements EnemyMove {
 
     @Override
