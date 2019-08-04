@@ -94,6 +94,14 @@ public class DungeonController {
     public void handleKeyPress(KeyEvent event) throws IOException, InterruptedException {
     	
     	if (!player.Alive){
+    		switch (currentLevel) {
+	      	  case 3:
+	      		deathLevelThree.start();
+	      	    break;
+	      	  case 4:
+	      		deathLevelFour.start();
+	      		break;
+    		}
     		return;
     	}
     	
@@ -184,13 +192,15 @@ public class DungeonController {
             break;
         case Q:
         	timer.cancel();
+        	mainMenuScreen.start();
             break;
         default:
             break;
         }
        
+        dungeon.checkPlayerEnemyCollision();
         dungeon.checkPlayerDungeonInteractions();
-
+        checkGoalsComplete();
     }
 
     
@@ -221,6 +231,66 @@ public class DungeonController {
 		}
     }
     
+	private int currentLevel;
+    private LevelOneCompleteScreen nextLevelOne;
+    private LevelTwoCompleteScreen nextLevelTwo;
+    private LevelThreeCompleteScreen nextLevelThree;
+    private LevelFourCompleteScreen nextLevelFour;
+    private DeathLevel3Screen deathLevelThree;
+    private DeathLevel4Screen deathLevelFour;
+    private MainMenuScreen mainMenuScreen;
+    
+    public void setCurrentLevel(int currentLevel) {
+    	this.currentLevel = currentLevel;
+    }
+    
+    public void setNextLevelOne(LevelOneCompleteScreen nextLevelOne) {
+		this.nextLevelOne = nextLevelOne;
+	}
+    
+    public void setNextLevelTwo(LevelTwoCompleteScreen nextLevelTwo) {
+		this.nextLevelTwo = nextLevelTwo;
+	}
+    
+    public void setNextLevelThree(LevelThreeCompleteScreen nextLevelThree) {
+		this.nextLevelThree = nextLevelThree;
+	}
+    
+    public void setNextLevelFour(LevelFourCompleteScreen nextLevelFour) {
+		this.nextLevelFour = nextLevelFour;
+	}
+    
+    public void setDeathLevelThree (DeathLevel3Screen deathLevelThree) {
+    	this.deathLevelThree = deathLevelThree;
+    }
+    
+    public void setDeathLevelFour (DeathLevel4Screen deathLevelFour) {
+    	this.deathLevelFour = deathLevelFour;
+    }
+    
+    public void setMainMenu (MainMenuScreen mainMenuScreen) {
+    	this.mainMenuScreen = mainMenuScreen;
+    }
+    
+    public void checkGoalsComplete() {
+    	if (dungeon.checkGoal()){
+        	switch (currentLevel) {
+        	  case 1:
+        		nextLevelOne.start();
+        	    break;
+        	  case 2:
+        		nextLevelTwo.start();
+        	    break;
+        	  case 3:
+        		nextLevelThree.start();
+        	    break;
+        	  case 4:
+                nextLevelFour.start();
+        	    break;
+        	}
+        }
+    }
+	
     public class IsKeyPressed {
         private volatile boolean pPressed = false;
         public boolean isPPressed() {

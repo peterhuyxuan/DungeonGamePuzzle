@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="22.0" layoutY="106.0">
+         <font>
+            <Font name="System Bold" size="44.0" />
+         </font>
+      </Label>
+      <Button fx:id="returnMainMenuButton" layoutX="165.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleReturnMainMenuButton" prefHeight="40.0" prefWidth="268.0" text="Return to Main Menu">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Label layoutX="129.0" layoutY="14.0" text="In-Game Controls">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="58.0" prefHeight="36.0" prefWidth="234.0" text="UP - Go Up">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="11.0" layoutY="98.0" prefHeight="36.0" prefWidth="234.0" text="DOWN - Go Down">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="12.0" layoutY="138.0" prefHeight="36.0" prefWidth="234.0" text="LEFT - Go Left">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="12.0" layoutY="180.0" prefHeight="36.0" prefWidth="234.0" text="RIGHT - Go Right">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="12.0" layoutY="259.0" prefHeight="36.0" prefWidth="234.0" text="B - Use Bomb">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="12.0" layoutY="218.0" prefHeight="36.0" prefWidth="234.0" text="E - Use Potion">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="330.0" layoutY="58.0" prefHeight="36.0" prefWidth="234.0" text="W - Attack Up" textAlignment="CENTER">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="330.0" layoutY="98.0" prefHeight="36.0" prefWidth="234.0" text="S - Attack Down" textAlignment="CENTER">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="330.0" layoutY="138.0" prefHeight="36.0" prefWidth="234.0" text="A - Attack Left" textAlignment="CENTER">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="330.0" layoutY="180.0" prefHeight="36.0" prefWidth="234.0" text="D - Attack Right" textAlignment="CENTER">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="330.0" layoutY="218.0" prefHeight="36.0" prefWidth="234.0" text="Q - Go Main Menu" textAlignment="CENTER">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+   </children>
+   <effect>
+      <SepiaTone />
+   </effect>
+</Pane>

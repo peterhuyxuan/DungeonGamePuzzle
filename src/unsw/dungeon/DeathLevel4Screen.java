@@ -1,0 +1,41 @@
+package unsw.dungeon;
+
+import java.io.IOException;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+public class DeathLevel4Screen {
+	private Stage stage;
+    private String title;
+    private DeathLevel4Controller controller;
+    private Scene scene;
+    
+    public DeathLevel4Screen(Stage stage) throws IOException {
+        this.stage = stage;
+        title = "RIP you died...";
+
+        controller = new DeathLevel4Controller();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Death.fxml"));
+        loader.setController(controller);
+
+        // load into a Parent node called root
+        Parent root = loader.load();
+        scene = new Scene(root, 600, 400);
+    }
+
+    public void start() {
+        stage.setTitle(title);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public DeathLevel4Controller getController() {
+        return controller;
+    }
+}
