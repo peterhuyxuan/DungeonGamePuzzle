@@ -60,28 +60,6 @@ public class DungeonController {
     
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities,  ImageView playerImage,  List<ImageView> initialEnemies) {
         this.dungeon = dungeon;
-        Sprite gg = new Sprite();
-        File king = new File("Users/admin/Dropbox/School work/Computer Science/COMP2511/Doobies/images/key.png");
-        try {
-			BufferedImage image = ImageIO.read(king);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        System.out.println(new File("key.png").getAbsolutePath());
-
-        
-        if(king.canRead()){ // Check if your file exists and is readable before you use it
-        	 System.out.println("readable");
-        } else{
-            try {
-				throw new IOException(king.getName() + " is not readable!");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} // Not readable -> Throw exception
-        }
-        BufferedImage df = Sprite.loadSprite("bomb_unlit");
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
         this.playerImage = playerImage;
