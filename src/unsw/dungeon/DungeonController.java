@@ -26,6 +26,8 @@ import javafx.util.Duration;
 
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
@@ -60,6 +62,8 @@ public class DungeonController {
     
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities,  ImageView playerImage,  List<ImageView> initialEnemies) {
         this.dungeon = dungeon;
+        Sprite s = new Sprite();
+        s.loadSprite("BombExploding");
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
         this.playerImage = playerImage;
@@ -106,6 +110,11 @@ public class DungeonController {
         		if (player.isMoved()) {
 	        		player.setMoving(true);   
 		            Timer timer  = new Timer();
+	
+		            AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+		            tx.translate(-playerImage.getWidth(null), 0);
+		            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+		            playerImage = op.filter(playerImage, null);
 		            timer.schedule(new PlayerMovingTimerTask(player), playerMoveSpeed);
 		            timer.schedule(new CancelTimerTimerTask(timer), playerMoveSpeed + 1);
 			        tt = new TranslateTransition(Duration.millis(playerMoveSpeed), this.playerImage);
