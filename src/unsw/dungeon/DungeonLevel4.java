@@ -27,7 +27,7 @@ public class DungeonLevel4 {
     }
 	
 	public void start() throws IOException {
-        dungeonLoader = new DungeonControllerLoader("advanced2.json");
+        dungeonLoader = new DungeonControllerLoader("marking.json");
         controller = dungeonLoader.loadController();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
